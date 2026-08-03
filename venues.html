@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Venues | Matthew Reate</title>
+  <meta
+    name="description"
+    content="Low-key DJ sets for restaurants, bars, and small rooms. Music that fits the space without taking it over."
+  >
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Venues | Matthew Reate">
+  <meta property="og:description" content="Low-key DJ sets for restaurants, bars, and small rooms. Music that fits the space without taking it over.">
+  <meta property="og:url" content="https://www.matthewreate.com/venues.html">
+  <meta property="og:site_name" content="Matthew Reate">
+  <meta property="og:image" content="https://www.matthewreate.com/img/hero/dj-hero-room-photo-lg.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Venues | Matthew Reate">
+  <meta name="twitter:description" content="Low-key DJ sets for restaurants, bars, and small rooms. Music that fits the space without taking it over.">
+  <meta name="twitter:image" content="https://www.matthewreate.com/img/hero/dj-hero-room-photo-lg.webp">
+  <meta name="theme-color" content="#f1ece6">
+  <link rel="canonical" href="https://www.matthewreate.com/venues.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 72'%3E%3Cpath d='M6 18 L74 18 L72 66 L8 66 Z' stroke='%231a1a1a' stroke-width='4' stroke-linejoin='round' fill='%23f1ece6'/%3E%3Cpath d='M7 30 L73 30 M7.5 42 L72.5 42 M8 54 L72 54' stroke='%231a1a1a' stroke-width='3'/%3E%3Cpath d='M20 18 L18 4 M35 18 L34 7 M50 18 L51 5 M62 18 L64 8' stroke='%231a1a1a' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Space+Mono:wght@400;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,700,0..100,0..1;1,9..144,700,0..100,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=20260311-01">
+  <style>
+    /* Venues page lane overrides — warm terracotta/copper tone */
+    .site-shell[data-page="venues"] {
+      --lane-accent: #a0694a;
+      --lane-accent-soft: #7d5439;
+      --lane-ink: #7a5638;
+      --lane-muted-text: #8a6e5a;
+      --lane-rule: rgba(140, 90, 58, 0.42);
+      --lane-rule-soft: rgba(140, 90, 58, 0.2);
+      --lane-wash: rgba(0, 0, 0, 0);
+      --lane-wash-strong: rgba(0, 0, 0, 0);
+      --lane-surface: rgba(252, 248, 244, 0.88);
+      --lane-surface-strong: rgba(246, 238, 230, 0.96);
+      --lane-outline: rgba(140, 90, 58, 0.38);
+      --lane-button-bg: #7a5638;
+      --lane-button-border: rgba(140, 90, 58, 0.7);
+      --lane-button-text: #f8f5ef;
+      --lane-button-hover-bg: #5e4028;
+      --ink-soft: #8a6e5a;
+      --color-archival-brown: #a0694a;
+      --color-archival-brown-soft: rgba(140, 90, 58, 0.34);
+      --rule: #cdbcaf;
+      --rule-strong: #b49a8a;
+      --archival-rule: rgba(140, 90, 58, 0.66);
+      --archival-rule-soft: rgba(140, 90, 58, 0.34);
+      --paper-elevated: rgba(252, 248, 244, 0.92);
+      --paper-soft: rgba(242, 233, 224, 0.82);
+    }
+
+    /* Venues-specific layout */
+    .venues-what-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-4) 0;
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .venues-what-item {
+      padding: var(--space-3) var(--space-4);
+      background: var(--paper-elevated);
+      border: var(--border-1) solid var(--lane-rule-soft);
+      border-radius: var(--radius-sm);
+    }
+
+    .venues-what-item-title {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--step--2);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lane-accent);
+      margin-bottom: var(--space-1);
+    }
+
+    .venues-what-item-copy {
+      font-family: var(--font-serif);
+      font-size: var(--step-0);
+      line-height: 1.64;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .venues-pull-quote {
+      font-family: var(--font-display);
+      font-size: var(--step-2);
+      font-style: italic;
+      line-height: 1.36;
+      color: var(--lane-accent);
+      max-width: var(--line-max);
+      margin: var(--space-6) 0;
+      padding-left: var(--space-4);
+      border-left: var(--border-3) solid var(--lane-rule-soft);
+    }
+
+    .venues-specs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-3);
+      margin: var(--space-4) 0;
+    }
+
+    .venues-spec {
+      padding: var(--space-2) 0;
+      border-top: var(--border-1) solid var(--lane-rule-soft);
+    }
+
+    .venues-spec-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--step--2);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lane-muted-text);
+      margin-bottom: 4px;
+    }
+
+    .venues-spec-value {
+      font-family: var(--font-serif);
+      font-size: var(--step-0);
+      color: var(--ink);
+    }
+
+    .venues-cta-block {
+      margin: var(--space-6) 0 var(--space-4);
+      padding: var(--space-4) var(--space-4);
+      background: var(--paper-elevated);
+      border: var(--border-1) solid var(--lane-rule-soft);
+      border-radius: var(--radius-sm);
+      text-align: center;
+    }
+
+    .venues-cta-block .editorial-paragraph {
+      margin-bottom: var(--space-3);
+    }
+
+    .venues-cta-email {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--step--1);
+      letter-spacing: 0.06em;
+      color: var(--lane-button-text);
+      background: var(--lane-button-bg);
+      border: var(--border-1) solid var(--lane-button-border);
+      padding: 10px 24px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background var(--motion-fast) var(--ease-standard);
+    }
+
+    .venues-cta-email:hover {
+      background: var(--lane-button-hover-bg);
+    }
+
+    .venues-music-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: var(--space-3) 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    .venues-music-tag {
+      font-family: var(--font-mono);
+      font-size: var(--step--2);
+      letter-spacing: 0.06em;
+      color: var(--lane-accent);
+      background: var(--paper-elevated);
+      border: var(--border-1) solid var(--lane-rule-soft);
+      padding: 4px 12px;
+      border-radius: var(--radius-sm);
+    }
+  </style>
+</head>
+<body class="site-shell" data-page="venues">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- ====== OBI STRIP ====== -->
+  <div class="obi-strip" aria-hidden="true">
+
+    <!-- Crate logo -->
+    <svg class="obi-logo" viewBox="0 0 80 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 18 L74 18 L72 66 L8 66 Z" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M7 30 L73 30" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M7.5 42 L72.5 42" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M8 54 L72 54" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M20 18 L18 4" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M35 18 L34 7" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M50 18 L51 5" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M62 18 L64 8" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+
+    <hr class="obi-rule">
+
+    <!-- ====== VENUES ====== -->
+    <span class="obi-section-label">Rooms</span>
+
+    <p class="obi-venue">Wythe Hotel</p>
+    <p class="obi-vibe">Williamsburg, big windows</p>
+
+    <p class="obi-venue">The Foundry</p>
+    <p class="obi-vibe">LIC, great light</p>
+
+    <p class="obi-venue">Brooklyn Winery</p>
+    <p class="obi-vibe">Williamsburg, warm intimate</p>
+
+    <p class="obi-venue">Foxfire Mtn House</p>
+    <p class="obi-vibe">Catskills, moody wooded</p>
+
+    <p class="obi-venue">Cedar Lakes Estate</p>
+    <p class="obi-vibe">Hudson Valley, outdoor magic</p>
+
+    <p class="obi-venue">Brooklyn Botanic</p>
+    <p class="obi-vibe">Brooklyn, dreamy garden</p>
+
+    <p class="obi-venue">Prospect Park</p>
+    <p class="obi-vibe">Brooklyn, lakeside classic</p>
+
+    <p class="obi-venue">Rule of Thirds</p>
+    <p class="obi-vibe">Greenpoint, minimal sharp</p>
+
+    <p class="obi-venue">The Hotel Chelsea</p>
+    <p class="obi-vibe">Chelsea, rock history</p>
+
+    <p class="obi-venue">Celestine</p>
+    <p class="obi-vibe">DUMBO, clean waterfront</p>
+
+    <p class="obi-venue">TWA Hotel</p>
+    <p class="obi-vibe">JFK, mid-century cool</p>
+
+    <p class="obi-venue">Smack Mellon</p>
+    <p class="obi-vibe">DUMBO, raw gallery</p>
+
+    <p class="obi-venue">Angel Orensanz</p>
+    <p class="obi-vibe">LES, cathedral scale</p>
+
+    <p class="obi-venue">The Capitol Theatre</p>
+    <p class="obi-vibe">Port Chester, rock venue</p>
+
+    <p class="obi-venue">Laser Wolf Brooklyn</p>
+    <p class="obi-vibe">Williamsburg, rooftop Israeli</p>
+
+    <p class="obi-venue">Aurora Brooklyn</p>
+    <p class="obi-vibe">Cobble Hill, warm wood</p>
+
+    <p class="obi-venue">Buttermilk Falls</p>
+    <p class="obi-vibe">Hudson Valley, waterfall inn</p>
+
+    <p class="obi-venue">Weekapaug Inn</p>
+    <p class="obi-vibe">Rhode Island, quiet luxury</p>
+
+    <p class="obi-venue">Pilgrim Monument</p>
+    <p class="obi-vibe">Provincetown, world's end</p>
+
+    <p class="obi-venue">Old Catskill</p>
+    <p class="obi-vibe">Catskills, abandoned zoo</p>
+
+    <p class="obi-dot">. . .</p>
+
+    <!-- ====== PLAYLISTS ====== -->
+    <span class="obi-section-label">Listening</span>
+
+    <a class="obi-playlist" href="https://open.spotify.com/playlist/4FSTLjk9G7zL4dSz5mMyU3" target="_blank" rel="noreferrer">Magic 92.5</a>
+    <span class="obi-playlist-desc">Where the taste started</span>
+
+    <a class="obi-playlist" href="https://open.spotify.com/playlist/3k6Z9JKvrJkZyKzh1ksrfR" target="_blank" rel="noreferrer">World Vintage</a>
+    <span class="obi-playlist-desc">Global funk, worn grooves</span>
+
+    <a class="obi-playlist" href="https://open.spotify.com/playlist/3XDH7BiW7JRlFLGTQWigmS" target="_blank" rel="noreferrer">Philly</a>
+    <span class="obi-playlist-desc">Emma and I love Philly</span>
+
+  <div class="obi-catalog">FN — 003<br>NEW YORK · NTW<br>MMXXVI</div>
+  </div>
+
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-wordmark" href="index.html">Matthew Reate</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="field-notes.html">Archive</a>
+        <a href="notes/">Notes</a>
+        <a href="dj.html">DJ</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main" id="main">
+    <section class="hero-block compact">
+      <p class="editorial-locator">MATTHEW REATE / PRACTICE / VENUES</p>
+      <p class="hero-kicker">Practice</p>
+      <h1 class="hero-thesis">DJ sets for restaurants and bars.</h1>
+      <p class="hero-deck">Music that fits the room without taking it over.</p>
+      <p class="hero-copy">I DJ about forty-five weddings a year. On the nights between, I play smaller rooms. Restaurants, bars, tasting rooms, patios. Places where the music should feel like it belongs there, not like someone hired a DJ.</p>
+    </section>
+
+    <section class="site-section" aria-labelledby="venues-what-title">
+      <div class="section-head section-head-tight">
+        <p class="section-kicker">What this is</p>
+        <h2 id="venues-what-title">The Setup</h2>
+      </div>
+      <ul class="venues-what-list">
+        <li class="venues-what-item">
+          <span class="venues-what-item-title">Sound</span>
+          <p class="venues-what-item-copy">One compact PA — warm, full, loud enough to fill a room without dominating it. If the venue has a house system, I'll plug into that instead. Either way, it sounds like music, not a sound system.</p>
+        </li>
+        <li class="venues-what-item">
+          <span class="venues-what-item-title">Footprint</span>
+          <p class="venues-what-item-copy">I take up about as much space as a two-top. Controller, one speaker, laptop. No lighting rigs, no fog machines. I show up, I set up in ten minutes, I break down in five.</p>
+        </li>
+        <li class="venues-what-item">
+          <span class="venues-what-item-title">Volume</span>
+          <p class="venues-what-item-copy">Background to mid-level. People should be able to talk without shouting. The music adds texture to the room. It doesn't compete with it.</p>
+        </li>
+        <li class="venues-what-item">
+          <span class="venues-what-item-title">Cost to you</span>
+          <p class="venues-what-item-copy">Nothing. I'm not looking for a paycheck. I'm looking for a room where I can play music I care about, build a following, and give people a reason to come back on a specific night.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="site-section" aria-labelledby="venues-music-title">
+      <div class="section-head section-head-tight">
+        <p class="section-kicker">Sound</p>
+        <h2 id="venues-music-title">What I Play</h2>
+      </div>
+      <p class="editorial-paragraph">Everything is curated to the room. I read the energy, the crowd, the time of night. But here's the palette I pull from for a restaurant or bar set:</p>
+      <ul class="venues-music-tags">
+        <li class="venues-music-tag">Bossa nova</li>
+        <li class="venues-music-tag">Latin funk</li>
+        <li class="venues-music-tag">Cumbia</li>
+        <li class="venues-music-tag">Soul</li>
+        <li class="venues-music-tag">Afrobeat</li>
+        <li class="venues-music-tag">Rare groove</li>
+        <li class="venues-music-tag">Disco</li>
+        <li class="venues-music-tag">Boogie</li>
+        <li class="venues-music-tag">Jazz</li>
+        <li class="venues-music-tag">Deep house</li>
+        <li class="venues-music-tag">Tropicalia</li>
+      </ul>
+      <p class="editorial-paragraph">No top 40. No requests line. No mic. Just music that makes a room feel better than it did before I got there.</p>
+    </section>
+
+    <p class="venues-pull-quote">I'm not trying to be the show. I'm trying to make the room feel like itself, but better.</p>
+
+    <section class="site-section" aria-labelledby="venues-specs-title">
+      <div class="section-head section-head-tight">
+        <p class="section-kicker">Details</p>
+        <h2 id="venues-specs-title">Specs</h2>
+      </div>
+      <div class="venues-specs">
+        <div class="venues-spec">
+          <span class="venues-spec-label">Gear</span>
+          <span class="venues-spec-value">RANE FOUR controller, compact PA or house system, MacBook Pro</span>
+        </div>
+        <div class="venues-spec">
+          <span class="venues-spec-label">Setup time</span>
+          <span class="venues-spec-value">10 minutes. One power outlet needed.</span>
+        </div>
+        <div class="venues-spec">
+          <span class="venues-spec-label">Set length</span>
+          <span class="venues-spec-value">2 to 4 hours, flexible</span>
+        </div>
+        <div class="venues-spec">
+          <span class="venues-spec-label">Volume</span>
+          <span class="venues-spec-value">Conversational. You set the ceiling, I stay under it.</span>
+        </div>
+        <div class="venues-spec">
+          <span class="venues-spec-label">Space needed</span>
+          <span class="venues-spec-value">Corner table, bar end, patio nook. Anywhere a two-top fits.</span>
+        </div>
+        <div class="venues-spec">
+          <span class="venues-spec-label">Based in</span>
+          <span class="venues-spec-value">Morristown, NJ. Available across North Jersey and NYC.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section" aria-labelledby="venues-who-title">
+      <div class="section-head section-head-tight">
+        <p class="section-kicker">Background</p>
+        <h2 id="venues-who-title">Who I Am</h2>
+      </div>
+      <p class="editorial-paragraph">I'm Matthew Reate. I DJ weddings full-time through <a href="https://www.ntweddingdjs.com/matthew" target="_blank" rel="noreferrer">Non-Traditional Wedding DJs</a> and I've been doing this work for years. I collect records, I write about music and rooms, and I take the craft seriously.</p>
+      <p class="editorial-paragraph">Venue sets are a different thing than weddings. No timeline, no toasts, no bouquet toss. Just music and a room. That's the part I love the most, and it's the part I want to do more of.</p>
+      <p class="editorial-paragraph">You can hear some of my sets on the <a href="./mixes.html">Mixes</a> page, or read about how I think about rooms in the <a href="./notes/">Notes</a>.</p>
+    </section>
+
+    <section class="site-section">
+      <div class="venues-cta-block">
+        <p class="editorial-paragraph">Want to try it? Let's do one night and see.</p>
+        <a class="venues-cta-email" href="mailto:matthewreate@gmail.com?subject=DJ%20set%20inquiry">matthewreate@gmail.com</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <span class="ecosystem-line">Matthew Reate</span>
+    <span class="footer-mark"><a href="https://www.ntweddingdjs.com/matthew" target="_blank" rel="noreferrer">NTW</a></span>
+  </footer>
+  <script defer src="./js/home-page.js"></script>
+  <script defer src="./js/audio-bar.js"></script>
+  <script defer src="./script.js?v=20260311-01"></script>
+  <script defer src="./js/spa-shim.js"></script>
+</body>
+</html>

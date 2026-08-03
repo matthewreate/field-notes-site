@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Field Notes — Prototype: The Crate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Space+Mono:wght@400;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,700,0..100,0..1;1,9..144,700,0..100,0..1&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       THE CRATE — vintage funk edition
+       Swiss grid, Stax details
+       ============================================ */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper: #f4f1eb;
+      --ink: #1a1a1a;
+      --ink-soft: #6b6b6b;
+      --accent: #c45a2d;
+      --accent-hover: #a84821;
+      --rule: #1a1a1a;
+      --rule-soft: rgba(26, 26, 26, 0.15);
+      --mono: 'Space Mono', 'Courier New', monospace;
+      --sans: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      --serif: 'Newsreader', Georgia, serif;
+      --content-width: 620px;
+      --space-xs: 6px;
+      --space-sm: 12px;
+      --space-md: 20px;
+      --space-lg: 40px;
+      --space-xl: 64px;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- HEADER ---- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--paper);
+      border-bottom: 2px solid var(--ink);
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .site-header-inner {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .wordmark {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .header-links {
+      display: flex;
+      gap: var(--space-md);
+    }
+
+    .header-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink-soft);
+      transition: color 120ms ease;
+    }
+
+    .header-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-md) var(--space-lg);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-tagline {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--space-sm);
+    }
+
+    .hero h1 {
+      font-family: var(--sans);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      max-width: 16ch;
+    }
+
+    .hero-sub {
+      margin-top: var(--space-md);
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 48ch;
+    }
+
+    .hero-sub a {
+      color: var(--ink);
+      text-decoration-color: var(--accent);
+      text-underline-offset: 3px;
+    }
+
+    .hero-stamp {
+      display: inline-block;
+      margin-top: var(--space-lg);
+      padding: 6px 10px 5px;
+      border: 1.5px solid var(--ink);
+      border-radius: 50%;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transform: rotate(-6deg);
+      color: var(--ink-soft);
+    }
+
+    /* ---- FILTER BAR ---- */
+    .filter-bar {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--rule-soft);
+      display: flex;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .filter-bar span {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: color 120ms ease;
+    }
+
+    .filter-bar span:hover,
+    .filter-bar span.is-active {
+      color: var(--ink);
+    }
+
+    .filter-bar span.is-active {
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-underline-offset: 4px;
+      text-decoration-thickness: 2px;
+    }
+
+    /* ---- FEED ---- */
+    .feed {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    /* ---- ENTRY (the universal card) ---- */
+    .entry {
+      padding: var(--space-lg) 0;
+      border-bottom: 1px solid var(--rule-soft);
+    }
+
+    .entry:last-child {
+      border-bottom: none;
+    }
+
+    .entry-meta {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xs);
+    }
+
+    .entry-date {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      color: var(--ink-soft);
+    }
+
+    .entry-type {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .entry-title {
+      font-family: var(--sans);
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .entry-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .entry-title a:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-underline-offset: 3px;
+      text-decoration-thickness: 2px;
+    }
+
+    .entry-body {
+      font-family: var(--serif);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 55ch;
+    }
+
+    .entry-body a {
+      color: var(--ink);
+      text-decoration-color: var(--accent);
+      text-underline-offset: 2px;
+    }
+
+    /* ---- ENTRY IMAGE ---- */
+    .entry-image {
+      margin: var(--space-md) 0 var(--space-sm);
+      position: relative;
+    }
+
+    .entry-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* the vintage "print on a table" treatment */
+    .entry-image.is-print {
+      background: #e9e5dc;
+      padding: 8px 8px 28px;
+      box-shadow: 2px 3px 8px rgba(30, 25, 18, 0.12);
+      transform: rotate(-0.8deg);
+      max-width: 480px;
+    }
+
+    .entry-image.is-print .image-caption {
+      position: absolute;
+      bottom: 6px;
+      left: 12px;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+    }
+
+    /* record cover style: slight rotation, square */
+    .entry-image.is-sleeve {
+      max-width: 260px;
+      transform: rotate(1.2deg);
+      box-shadow: 3px 4px 10px rgba(30, 25, 18, 0.15);
+    }
+
+    .entry-image.is-sleeve img {
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    /* ---- ARTISTS / RECORDS MENTIONED ---- */
+    .entry-mentions {
+      margin-top: var(--space-sm);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.03em;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .entry-mentions strong {
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    /* ---- MIX ENTRY SPECIFICS ---- */
+    .entry-mix-bar {
+      margin-top: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--rule-soft);
+      background: rgba(26, 26, 26, 0.03);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .mix-play-btn {
+      width: 28px;
+      height: 28px;
+      border: 1.5px solid var(--ink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: background 120ms ease, border-color 120ms ease;
+    }
+
+    .mix-play-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .mix-play-btn:hover svg { fill: var(--paper); }
+
+    .mix-play-btn svg {
+      width: 10px;
+      height: 10px;
+      fill: var(--ink);
+      margin-left: 2px;
+    }
+
+    .mix-details {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.02em;
+    }
+
+    /* ---- CTA / CONTACT CARD ---- */
+    .contact-card {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-md);
+      border-top: 2px solid var(--ink);
+    }
+
+    .contact-card-inner {
+      border: 1.5px solid var(--ink);
+      padding: var(--space-lg) var(--space-md);
+      position: relative;
+      background: var(--paper);
+    }
+
+    .contact-card-stamp {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--accent);
+      color: var(--paper);
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px 3px;
+      transform: rotate(2deg);
+    }
+
+    .contact-card h2 {
+      font-family: var(--sans);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: var(--space-xs);
+    }
+
+    .contact-card p {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      max-width: 44ch;
+    }
+
+    .contact-card .contact-links {
+      margin-top: var(--space-md);
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .contact-card .contact-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--ink);
+      padding: 8px 14px 7px;
+      transition: background 120ms ease, color 120ms ease;
+    }
+
+    .contact-card .contact-links a:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    /* ---- FOOTER ---- */
+    .site-footer {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: var(--space-md);
+      border-top: 1px solid var(--rule-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .footer-left {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .footer-right {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--ink-soft);
+    }
+
+    .footer-right a {
+      color: var(--ink-soft);
+      text-decoration: none;
+    }
+
+    .footer-right a:hover {
+      color: var(--accent);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .entry-image.is-print { max-width: 100%; transform: none; }
+      .entry-image.is-sleeve { max-width: 200px; }
+      .contact-card-inner { padding: var(--space-md); }
+    }
+  </style>
+  <meta property="og:image" content="https://www.matthewreate.com/img/hero/dj-hero-room-photo-lg.webp">
+  <meta name="twitter:image" content="https://www.matthewreate.com/img/hero/dj-hero-room-photo-lg.webp">
+  <meta name="theme-color" content="#f1ece6">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 72'%3E%3Cpath d='M6 18 L74 18 L72 66 L8 66 Z' stroke='%231a1a1a' stroke-width='4' stroke-linejoin='round' fill='%23f1ece6'/%3E%3Cpath d='M7 30 L73 30 M7.5 42 L72.5 42 M8 54 L72 54' stroke='%231a1a1a' stroke-width='3'/%3E%3Cpath d='M20 18 L18 4 M35 18 L34 7 M50 18 L51 5 M62 18 L64 8' stroke='%231a1a1a' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ====== HEADER ====== -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-wordmark" href="index.html">Matthew Reate</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="field-notes.html">Archive</a>
+        <a href="notes/">Notes</a>
+        <a href="dj.html">DJ</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero">
+    <p class="hero-tagline">NYC / NJ / Hudson Valley</p>
+    <h1>Wedding DJ work shaped by records and real rooms.</h1>
+    <p class="hero-sub">
+      I'm Matthew Reate. About forty-five weddings a year, from small dinner rooms to floors past two hundred. Bookings through <a href="https://www.ntweddingdjs.com/matthew" target="_blank" rel="noreferrer">Non-Traditional Wedding DJs</a>.
+    </p>
+    <span class="hero-stamp">Est. 2016</span>
+  </section>
+
+  <!-- ====== FILTER ====== -->
+  <div class="filter-bar">
+    <span class="is-active">All</span>
+    <span>Notes</span>
+    <span>Gigs</span>
+    <span>Records</span>
+    <span>Mixes</span>
+  </div>
+
+  <!-- ====== FEED ====== -->
+  <div class="feed">
+
+    <!-- Entry: Field Note / Gig -->
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2026-01</span>
+        <span class="entry-type">Gig</span>
+      </div>
+      <h2 class="entry-title"><a href="#">Vendor Cocktail Hour at Brooklyn Winery</a></h2>
+      <p class="entry-body">
+        A smaller vendor room at Brooklyn Winery. Vintage-leaning selections, live audio, and the kind of groove adjustments that only show up once the room starts talking back.
+      </p>
+      <div class="entry-image is-print">
+        <img src="./assets/img/home/archive/home-archive-brooklyn-buffet-turntable.jpg" alt="DJ setup at Brooklyn Winery with turntable and buffet in view" loading="lazy">
+        <span class="image-caption">Brooklyn Winery, Jan 2026</span>
+      </div>
+      <div class="entry-mentions">
+        <strong>Room:</strong> 40 people, cocktail format, vendor appreciation night
+      </div>
+    </article>
+
+    <!-- Entry: Note -->
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2026-01-15</span>
+        <span class="entry-type">Note</span>
+      </div>
+      <h2 class="entry-title"><a href="#">Why Cocktail Hour Should Never Feel Like Background Music</a></h2>
+      <p class="entry-body">
+        Cocktail hour sets the room's first temperature. The Meters into Say She She into Idris Muhammad. First hour. First signals. The room is learning what kind of night this is.
+      </p>
+      <div class="entry-mentions">
+        <strong>Artists:</strong> The Meters, Say She She, Prince, Idris Muhammad, Peter Cat Recording Co., Feist, Marvin Gaye
+      </div>
+    </article>
+
+    <!-- Entry: Record -->
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2026-02-03</span>
+        <span class="entry-type">Record</span>
+      </div>
+      <h2 class="entry-title"><a href="#">Sharon Jones & The Dap-Kings — Naturally</a></h2>
+      <p class="entry-body">
+        Room-tested a hundred times. "How Do I Let a Good Man Down" is the dinner-to-dance bridge record. Pulls the floor forward without pushing.
+      </p>
+      <div class="entry-image is-sleeve">
+        <img src="./assets/img/covers/1386802.jpg" alt="Album cover" loading="lazy">
+      </div>
+    </article>
+
+    <!-- Entry: Note -->
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2026-02-18</span>
+        <span class="entry-type">Note</span>
+      </div>
+      <h2 class="entry-title"><a href="#">Why Dinner Music Is the Hardest DJ Set</a></h2>
+      <p class="entry-body">
+        Dinner has to keep the room alive without competing with conversation. Too quiet and the energy dies. Too loud and the room fights you. The set has to breathe on its own.
+      </p>
+    </article>
+
+    <!-- Entry: Mix -->
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2026-03-01</span>
+        <span class="entry-type">Mix</span>
+      </div>
+      <h2 class="entry-title"><a href="#">Record Collector Cocktail Hour</a></h2>
+      <p class="entry-body">
+        Bossa nova, soul, rare groove, and a few left turns. The kind of cocktail hour set where someone asks "what is this?" three times.
+      </p>
+      <div class="entry-mix-bar">
+        <div class="mix-play-btn">
+          <svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg>
+        </div>
+        <span class="mix-details">48:22 / Recorded live, Feb 2026</span>
+      </div>
+    </article>
+
+    <!-- Entry: Note -->
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2026-03-10</span>
+        <span class="entry-type">Note</span>
+      </div>
+      <h2 class="entry-title"><a href="#">What Makes a Wedding Dance Floor Actually Work</a></h2>
+      <p class="entry-body">
+        How a floor starts trusting itself. It's not about the first big song. It's about the three songs before it that gave people permission to move.
+      </p>
+      <div class="entry-image is-print">
+        <img src="./assets/img/home/home-hero-limbo-artifact.jpg" alt="Crowded wedding dance floor during a limbo moment" loading="lazy">
+        <span class="image-caption">Dance floor, mid-turn</span>
+      </div>
+    </article>
+
+    <!-- Entry: Record -->
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2026-03-20</span>
+        <span class="entry-type">Note</span>
+      </div>
+      <h2 class="entry-title"><a href="#">Rare Groove Records That Work in Real Rooms</a></h2>
+      <p class="entry-body">
+        Collector records that still work on people. Not the ones that sound good at home on headphones. The ones that move a room full of strangers who've never heard them before.
+      </p>
+      <div class="entry-mentions">
+        <strong>Key records:</strong> Roy Ayers, Idris Muhammad, Lonnie Liston Smith, Donald Byrd
+      </div>
+    </article>
+
+  </div>
+
+  <!-- ====== CONTACT CARD ====== -->
+  <section class="contact-card">
+    <div class="contact-card-inner">
+      <span class="contact-card-stamp">Booking</span>
+      <h2>Booked through Non-Traditional Wedding DJs.</h2>
+      <p>Every wedding I play is booked and handled by NTW. To check a date or start a booking, reach the team:</p>
+      <div class="contact-links">
+        <a href="https://www.ntweddingdjs.com/matthew" target="_blank" rel="noreferrer">My NTW Profile ↗</a>
+        <a href="tel:+19175866753">Call / Text 917-586-6753</a>
+        <a href="mailto:ben@ntweddingdjs.com">ben@ntweddingdjs.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="site-footer">
+    <span class="footer-left">Matthew Reate</span>
+    <span class="footer-right"><a href="https://www.ntweddingdjs.com/matthew" target="_blank" rel="noreferrer">NTW</a></span>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "mixes": [
+    {
+      "id": "deep-cut-cocktail-hour",
+      "title": "Deep Cut Cocktail Hour",
+      "genre": "Soul / Brazilian / Boogie",
+      "runtime": "54:24",
+      "audio_url": "https://pub-67f7093beab94c4c96e1858a443fbe71.r2.dev/mixes/Deep%20Cut%20Cocktail%20Hour.m4a",
+      "mix_page_url": "/mixes/deep-cut-cocktail-hour.html",
+      "note": "A cocktail-hour set of deep cuts. Brazilian jazz, soul, and boogie, recorded live in one pass."
+    },
+    {
+      "id": "wine-bar-dinner",
+      "title": "Wine Bar Dinner",
+      "genre": "Soul / Brazilian / Rare Groove",
+      "runtime": "40:33",
+      "audio_url": "https://pub-67f7093beab94c4c96e1858a443fbe71.r2.dev/mixes/Wine%20Bar%20Dinner.m4a",
+      "mix_page_url": "/mixes/wine-bar-dinner.html",
+      "note": "First draft, recorded off the top of my head in one pass. Slow ramp, no edits."
+    },
+    {
+      "id": "disco-house-mix",
+      "title": "Disco House Mix",
+      "genre": "Disco / House",
+      "runtime": "34:13",
+      "audio_url": "https://pub-67f7093beab94c4c96e1858a443fbe71.r2.dev/mixes/Disco%20House%20Mix.m4a",
+      "note": "Disco into house. The tempo lift after midnight when the floor is already committed."
+    },
+    {
+      "id": "record-collector-cocktail-hour",
+      "title": "Record Collector Cocktail Hour",
+      "genre": "Bossa / Soul / Rare Groove",
+      "runtime": "45:21",
+      "audio_url": "https://pub-67f7093beab94c4c96e1858a443fbe71.r2.dev/mixes/Record-Collector%20Cocktail%20Hour.mp3",
+      "mix_page_url": "/playlists/record-collector-cocktail-hour.html",
+      "note": "Bossa nova, soul, rare groove, and a few left turns. Recorded live, Feb 2026."
+    },
+    {
+      "id": "mix_002",
+      "title": "Englewood Field Club / Wedding",
+      "issue_id": "FN_ISSUE_002",
+      "runtime": "00:50:41",
+      "audio_url": "https://pub-67f7093beab94c4c96e1858a443fbe71.r2.dev/mixes/issue_002.mp3",
+      "note": "Live capture from the final dance-floor run, after a split-location setup and a dinner pivot that opened the older crowd."
+    },
+    {
+      "id": "mix_001",
+      "title": "Brooklyn Winery / Vendor Appreciation Cocktail Hour",
+      "issue_id": "BW_ISSUE_001",
+      "runtime": "01:07:20",
+      "audio_url": "https://example.com/field-notes-audio-link-coming-soon",
+      "note": "Live room pacing with deliberate BPM jumps and vintage-weighted selections."
+    }
+  ]
+}

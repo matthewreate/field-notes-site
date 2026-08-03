@@ -1,0 +1,142 @@
+/* ============================================
+   THE CRATE — Design Tokens
+   Vintage funk edition: Swiss grid, Stax details
+   ============================================ */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Palette ----
+     Base colors stay hex (source of truth, grep-friendly, zero drift).
+     Derived colors use color-mix(in oklch, ...) for perceptually-correct
+     tints — same result as the old rgba values, but portable across
+     future palette changes. */
+  --paper: #f1ece6;
+  --paper-elevated: #f1ece6;
+  --paper-soft: #f1ece6;
+  --paper-shadow: transparent;
+  --paper-overlay: #f1ece6;
+  --paper-recessed: color-mix(in oklch, var(--paper), var(--ink) 3%); /* for alt-row surfaces */
+  --ink: #1a1a1a;
+  --ink-soft: #5a5a5a; /* 5.7:1 on --paper, passes AAA for body */
+  --accent: #c4524a;
+  --accent-hover: color-mix(in oklch, var(--accent), black 12%); /* ≈ old #a8423c */
+
+  /* Legacy compat — mapped to new palette */
+  --shell-bg: #1a1a1a;
+  --shell-bg-soft: #2a2a2a;
+  --shell-ink: #f1ece6;
+  --shell-ink-soft: color-mix(in oklch, var(--paper), transparent 30%);
+  --color-card-buff: var(--paper);
+  --color-card-sage: var(--paper);
+  --color-card-rose: var(--paper);
+  --color-archival-brown: var(--ink-soft);
+  --color-archival-brown-soft: color-mix(in oklch, var(--ink-soft), transparent 68%);
+  --stamp: var(--accent);
+  --color-tab-yellow: var(--accent);
+  --ok: var(--ink);
+  --warn: #654316;
+  --warn-bg: var(--paper);
+  --warn-rule: var(--ink);
+
+  /* ---- Rules ---- */
+  --rule: var(--ink);
+  --rule-strong: var(--ink);
+  --rule-soft: color-mix(in oklch, var(--ink), transparent 85%);
+  --archival-rule: var(--ink);
+  --archival-rule-soft: color-mix(in oklch, var(--ink), transparent 85%);
+  --archival-tab-paper: var(--paper);
+  --archival-grain-opacity: 0;
+  --archival-dotted-divider: 1px solid var(--rule-soft);
+  --archival-double-divider: 1px solid var(--rule);
+
+  /* ---- Lane palette (flattened — all pages same) ---- */
+  --lane-home-accent: var(--ink);
+  --lane-home-accent-soft: var(--ink-soft);
+  --lane-home-tint: transparent;
+  --lane-home-tint-strong: transparent;
+  --lane-home-ink: var(--ink);
+
+  --lane-field-accent: var(--ink);
+  --lane-field-accent-soft: var(--ink-soft);
+  --lane-field-tint: transparent;
+  --lane-field-tint-strong: transparent;
+  --lane-field-ink: var(--ink);
+
+  --lane-notes-accent: var(--ink);
+  --lane-notes-accent-soft: var(--ink-soft);
+  --lane-notes-tint: transparent;
+  --lane-notes-tint-strong: transparent;
+  --lane-notes-ink: var(--ink);
+
+  --lane-records-accent: var(--ink);
+  --lane-records-accent-soft: var(--ink-soft);
+  --lane-records-tint: transparent;
+  --lane-records-tint-strong: transparent;
+  --lane-records-ink: var(--ink);
+
+  --lane-dj-accent: var(--ink);
+  --lane-dj-accent-soft: var(--ink-soft);
+  --lane-dj-tint: transparent;
+  --lane-dj-tint-strong: transparent;
+  --lane-dj-ink: var(--ink);
+
+  --lane-about-accent: var(--ink);
+  --lane-about-accent-soft: var(--ink-soft);
+  --lane-about-tint: transparent;
+  --lane-about-tint-strong: transparent;
+  --lane-about-ink: var(--ink);
+
+  /* ---- Typography ---- */
+  --font-sans: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-ui: var(--font-sans);
+  --font-accent: var(--font-mono);
+
+  /* Type scale */
+  --step--2: 0.62rem;
+  --step--1: clamp(0.69rem, 0.1vw + 0.66rem, 0.75rem);
+  --step-0: clamp(0.95rem, 0.15vw + 0.91rem, 1.05rem);
+  --step-1: clamp(1.1rem, 0.3vw + 1rem, 1.25rem);
+  --step-2: clamp(1.3rem, 0.8vw + 1rem, 1.6rem);
+  --step-3: clamp(1.6rem, 1.5vw + 1rem, 2.2rem);
+  --step-4: clamp(2rem, 3vw + 1rem, 3rem);
+  --line-max: 55ch;
+
+  /* ---- Spacing ---- */
+  --space-1: 6px;
+  --space-2: 12px;
+  --space-3: 20px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --content-narrow: 620px;
+  --content-standard: 840px;
+  --content-wide: 1040px;
+
+  /* ---- Borders ---- */
+  --border-1: 1px;
+  --border-2: 2px;
+  --border-3: 3px;
+  --border-4: 4px;
+  --radius-none: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+
+  /* ---- Shadows (vintage-physical only) ---- */
+  --shadow-none: none;
+  --shadow-soft: none;
+  --shadow-float: 2px 3px 8px rgba(30, 25, 18, 0.12);
+  --shadow-hard: 3px 4px 10px rgba(30, 25, 18, 0.15);
+
+  /* ---- Motion ---- */
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-slow: 320ms;
+  --ease-standard: ease-out;
+}

@@ -1,0 +1,62 @@
+{
+  "playlists": [
+    {
+      "id": "record-collector-cocktail-hour",
+      "slug": "playlists/record-collector-cocktail-hour",
+      "title": "Record Collector Cocktail Hour",
+      "blurb": "Warm, social, slightly left of center.\nMusic for first pours, early conversations, and a room coming into focus.",
+      "excerpt": "First pours, warm records, the room waking up.",
+      "tags": [
+        "cocktail hour",
+        "playlist",
+        "record collector",
+        "rare groove",
+        "soul",
+        "bossa nova",
+        "wedding DJ",
+        "room energy",
+        "vinyl culture",
+        "dj craft"
+      ],
+      "url": "/playlists/record-collector-cocktail-hour.html",
+      "spotify_url": "https://open.spotify.com/playlist/4EI23VsLGovn4HO3YFXHaq?si=34f829e88ef64239",
+      "embed_url": "https://open.spotify.com/embed/playlist/4EI23VsLGovn4HO3YFXHaq?utm_source=generator"
+    },
+    {
+      "id": "record-collector-dinner",
+      "slug": "playlists/record-collector-dinner",
+      "title": "Record Collector Dinner",
+      "blurb": "Rhythmic, unhurried.\nMusic that keeps the room alive without leaning on it too hard.",
+      "excerpt": "Dinner music that keeps the room alive.",
+      "url": "/playlists/record-collector-dinner.html",
+      "tags": [
+        "dinner music",
+        "playlist",
+        "record collector",
+        "wedding DJ",
+        "room energy",
+        "dj craft"
+      ],
+      "spotify_url": "https://open.spotify.com/playlist/0UfJoJUfRD3g5NWgmX8Bxl?si=4952506b3b5e4b1f",
+      "embed_url": "https://open.spotify.com/embed/playlist/0UfJoJUfRD3g5NWgmX8Bxl?utm_source=generator"
+    },
+    {
+      "id": "record-collector-floor-openers",
+      "slug": "playlists/record-collector-floor-openers",
+      "title": "Record Collector Floor Openers",
+      "blurb": "The first turn toward the dance floor.\nRecords and songs that open the room without forcing the issue.",
+      "excerpt": "The first turn toward the floor.",
+      "url": "/playlists/record-collector-floor-openers.html",
+      "tags": [
+        "dance floor",
+        "playlist",
+        "record collector",
+        "sequencing",
+        "wedding DJ",
+        "party dynamics"
+      ],
+      "spotify_url": "https://open.spotify.com/playlist/3nD53BiAdxDkAGSZ0hC1mx?si=c23fe5fcfac342d9",
+      "embed_url": "https://open.spotify.com/embed/playlist/3nD53BiAdxDkAGSZ0hC1mx?utm_source=generator"
+    }
+  ]
+}

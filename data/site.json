@@ -1,0 +1,37 @@
+{
+  "site_title": "Field Notes",
+  "asset_version": "20260311-01",
+  "location": "Brooklyn, NY",
+  "contact_email": "matthewreate@gmail.com",
+  "booking_email": "matthewreate@gmail.com,ben@ntweddingdjs.com",
+  "records_related_note_slugs": [
+    "rare-groove-records-that-work-in-real-rooms",
+    "why-cocktail-hour-should-never-feel-like-background-music"
+  ],
+  "ecosystem_statement": "Wedding DJ work, records, and notes in one place.",
+  "field_notes_related_note_slugs": [
+    "why-dinner-music-is-the-hardest-dj-set",
+    "why-cocktail-hour-should-never-feel-like-background-music",
+    "what-makes-a-wedding-dance-floor-actually-work",
+    "rare-groove-records-that-work-in-real-rooms"
+  ],
+  "featured_issue_id": "BW_ISSUE_001",
+  "featured_mix_id": "mix_001",
+  "featured_record_ids": [
+    "rec_006",
+    "rec_004",
+    "rec_002",
+    "rec_001"
+  ],
+  "dj_inquiry_subject": "Wedding DJ Inquiry",
+  "dj_inquiry_body_template": "Event date:%0ACity:%0AVenue:%0AGuest count:%0AMusic direction:%0A",
+  "dj_proof_issue_id": "BW_ISSUE_001",
+  "dj_proof_note_slug": "what-makes-a-wedding-dance-floor-actually-work",
+  "issue_page_description": "A Field Notes issue page with live set recording, room context, highlights, photos, and notes from a real event.",
+  "issue_related_note_slugs": [
+    "why-cocktail-hour-should-never-feel-like-background-music",
+    "what-makes-a-wedding-dance-floor-actually-work",
+    "rare-groove-records-that-work-in-real-rooms"
+  ],
+  "issue_latest_note_label": "Latest Issue"
+}

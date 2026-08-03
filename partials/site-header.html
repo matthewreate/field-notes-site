@@ -1,0 +1,15 @@
+<!-- SINGLE SOURCE OF TRUTH for the site header. Edit here, then run `npm run build:header`
+     (or `npm run build:site`) to stamp every page. Do not hand-edit headers in page files.
+     Tokens: __P__ = relative path prefix to site root; __ACT_*__ = active-link attributes. -->
+<header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-wordmark" href="__P__index.html">Matthew Reate</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a __ACT_HOME__href="__P__index.html">Home</a>
+        <a __ACT_ARCHIVE__href="__P__field-notes.html">Archive</a>
+        <a __ACT_NOTES__href="__P__notes/">Notes</a>
+        <a __ACT_DJ__href="__P__dj.html">DJ</a>
+        <a __ACT_ABOUT__href="__P__about.html">About</a>
+      </nav>
+    </div>
+  </header>

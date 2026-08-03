@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="Selected copy cover placeholder 006">
+  <image href="../ui/paper-texture-02.png" x="0" y="0" width="1200" height="1200" preserveAspectRatio="xMidYMid slice" opacity="0.22"/>
+  <rect x="74" y="74" width="1052" height="1052" fill="#f9f6ef" stroke="#181511" stroke-width="2"/>
+  <rect x="124" y="124" width="952" height="952" fill="none" stroke="#181511" stroke-width="1" opacity="0.48"/>
+  <text x="188" y="210" font-family="ui-monospace, Menlo, monospace" font-size="18" fill="#3f382f" letter-spacing="1.6">FIRST POUR / COPY 006</text>
+  <path d="M176 226 H1024" stroke="#181511" stroke-width="1.4"/>
+  <rect x="208" y="286" width="784" height="472" fill="#f1eada" stroke="#181511" stroke-width="1.2"/>
+  <path d="M248 638 C 390 410, 810 410, 952 638" fill="none" stroke="#181511" stroke-width="1.8"/>
+  <path d="M282 612 C 402 446, 798 446, 918 612" fill="none" stroke="#181511" stroke-width="1" opacity="0.52"/>
+  <text x="188" y="884" font-family="ui-serif, Georgia, serif" font-size="48" fill="#17130f">9TH CREATION</text>
+  <text x="188" y="938" font-family="ui-serif, Georgia, serif" font-size="36" fill="#17130f">Mellow Music</text>
+  <text x="188" y="982" font-family="ui-monospace, Menlo, monospace" font-size="20" fill="#423b31" letter-spacing="1.2">RCA · 1975 · LP</text>
+  <image href="../ui/stamp-selected-copies.svg" x="690" y="884" width="320" height="104" opacity="0.23"/>
+  <image href="../ui/mark-dot.svg" x="978" y="184" width="24" height="24" opacity="0.62"/>
+</svg>

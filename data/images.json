@@ -1,0 +1,203 @@
+{
+  "home": {
+    "hero": {
+      "src": "./assets/img/home/home-hero-limbo-artifact.jpg?v=limbo-artifact-20260307",
+      "alt": "View from the DJ booth of a crowded wedding dance floor during a limbo moment, with guests gathered around the center of the room.",
+      "caption": "",
+      "ratio": "16:9",
+      "label": "Hero image",
+      "hero": true,
+      "sizes": "(min-width: 1040px) 720px, 100vw",
+      "initial_index": 0,
+      "control_label": "next room",
+      "prints": [
+        {
+          "src": "./assets/img/home/home-hero-limbo-artifact.jpg?v=limbo-artifact-20260307",
+          "alt": "View from the DJ booth of a crowded wedding dance floor during a limbo moment, with guests gathered around the center of the room."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-ceremony-garden-from-booth.jpg",
+          "alt": "View from the DJ booth of an outdoor wedding ceremony in a garden, with guests seated beneath trees and the couple at the arbor."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-loft-setup-river-view.jpg",
+          "alt": "DJ setup in a bright loft room with speakers facing a river and skyline view before guests fully fill the space."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-tent-dinner-from-booth.jpg",
+          "alt": "View from the DJ booth across a tented wedding dinner as guests settle into long tables beneath string lights."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-brooklyn-buffet-turntable.jpg",
+          "alt": "View past a turntable and mixer toward guests gathering around a buffet table with the Brooklyn skyline visible through the windows."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-loft-dance-blur.jpg",
+          "alt": "Blurred late-night crowd scene inside a loft dance floor as guests move through a dark room with warm light spilling in from the bar."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-loft-crowd-hands-up.jpg",
+          "alt": "Crowded loft dance floor with hands up and bodies packed close together beneath low ceiling lights."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-performance-floor-chaos.jpg",
+          "alt": "A crowded dance floor during a performance-heavy late-night moment, with guests pressed in close under glowing ceiling fixtures."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-ballroom-circle-dance.jpg",
+          "alt": "Guests moving into a loose circle on a ballroom dance floor beneath tall curtains and warm uplighting."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-disco-floor-from-booth.jpg",
+          "alt": "View from the DJ booth of a packed dance floor beneath disco balls, with the controller glowing in the foreground."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-tent-night-dance.jpg",
+          "alt": "Guests dancing beneath a tent at night with string lights overhead and the room opening out into the dark lawn beyond."
+        },
+        {
+          "src": "./assets/img/home/archive/home-archive-afterparty-firepit-from-booth.jpg",
+          "alt": "View from the DJ table of guests gathered around a fire pit late in the evening, with the laptop glowing in the foreground."
+        }
+      ]
+    },
+    "proof": {
+      "src": "./assets/img/home/home-proof-hora-chair-lift.jpg?v=hora-home-20260306",
+      "alt": "Chair-lift dance floor moment under a wedding tent with guests gathered tightly around the couple.",
+      "caption": "Chair-lift moment once the room fully turned.",
+      "ratio": "4:3",
+      "label": "Recent room proof"
+    },
+    "detail": {
+      "src": "./assets/img/hero/home-detail-dance-spread.png?v=2cc1891",
+      "alt": "Illustrated cosmic keyboard player set inside a record crate sleeve.",
+      "caption": "",
+      "ratio": "4:3",
+      "label": "Detail image"
+    }
+  },
+  "field_notes": {
+    "hero": {
+      "src": "./assets/img/hero/field-notes-polaroid-dance-floor.jpg",
+      "alt": "Polaroid photo of a dance floor from behind the DJ booth with a laptop and guests in motion.",
+      "caption": "",
+      "ratio": "4:3",
+      "label": "Field Notes image",
+      "hero": true
+    }
+  },
+  "dj": {
+    "hero_room": {
+      "src": "./assets/img/dj/dj-hero-nyc-skyline.jpg?v=djhero-20260306b",
+      "alt": "DJ setup with controller, laptop, and microphone overlooking the New York City skyline.",
+      "caption": "",
+      "ratio": "16:9",
+      "label": "Room image",
+      "hero": true
+    },
+    "detail_one": {
+      "src": "./assets/img/dj/dj-crowd-proof-disco-floor-from-booth.jpg?v=djproof-20260308a",
+      "alt": "View from the DJ booth of a packed wedding dance floor under disco balls, with guests moving through a dark room.",
+      "caption": "",
+      "ratio": "4:3",
+      "label": "Dance floor proof"
+    },
+    "detail_two": {
+      "src": "./assets/img/dj/dj-room-proof-tent-dinner-from-booth.jpg?v=djproof-20260308a",
+      "alt": "View from the DJ booth across a tented wedding dinner, with the controller, microphone, and room visible before dancing begins.",
+      "caption": "",
+      "ratio": "4:3",
+      "label": "Room setup proof"
+    },
+    "proof_setup": {
+      "src": "./assets/img/dj/dj-tent-rig-overview.jpg?v=ba0bfe8",
+      "alt": "Wedding DJ controller and laptop setup under a tent before the room fills.",
+      "caption": "",
+      "ratio": "4:3",
+      "label": "Wedding setup overview"
+    }
+  },
+  "about": {
+    "hero": {
+      "src": "./assets/img/hero/about-polaroid-portrait.jpg",
+      "alt": "Polaroid portrait of Matthew DJing with headphones around his neck in a wood-paneled room.",
+      "caption": "A booth-side portrait.",
+      "ratio": "4:3",
+      "label": "About portrait",
+      "hero": true
+    },
+    "detail_one": {
+      "src": "",
+      "alt": "About detail image one",
+      "caption": "",
+      "ratio": "4:3",
+      "label": "Detail image"
+    },
+    "detail_two": {
+      "src": "",
+      "alt": "About detail image two",
+      "caption": "",
+      "ratio": "4:3",
+      "label": "Detail image"
+    }
+  },
+  "records": {
+    "hero": {
+      "src": "",
+      "alt": "Record shelf detail image",
+      "caption": "",
+      "ratio": "4:3",
+      "label": "Record cover"
+    },
+    "covers": {
+      "rec_001": {
+        "photo_src": "./assets/selected-copies/cover-001.svg",
+        "sketch_src": "./assets/selected-copies/cover-001-sketch.svg",
+        "src": "./assets/selected-copies/cover-001.svg",
+        "alt": "Atmosfear Dancing in Outer Space cover",
+        "label": "Record cover",
+        "ratio": "square"
+      },
+      "rec_002": {
+        "photo_src": "./assets/selected-copies/cover-002.svg",
+        "sketch_src": "",
+        "src": "./assets/selected-copies/cover-002.svg",
+        "alt": "The Blackbyrds Rock Creek Park cover",
+        "label": "Record cover",
+        "ratio": "square"
+      },
+      "rec_003": {
+        "photo_src": "./assets/selected-copies/cover-003.svg",
+        "sketch_src": "",
+        "src": "./assets/selected-copies/cover-003.svg",
+        "alt": "BLO Chant to Mother Earth cover",
+        "label": "Record cover",
+        "ratio": "square"
+      },
+      "rec_004": {
+        "photo_src": "./assets/selected-copies/cover-004.svg",
+        "sketch_src": "",
+        "src": "./assets/selected-copies/cover-004.svg",
+        "alt": "Jorge Ben Umbabarauma cover",
+        "label": "Record cover",
+        "ratio": "square"
+      },
+      "rec_005": {
+        "photo_src": "./assets/selected-copies/cover-005.svg",
+        "sketch_src": "",
+        "src": "./assets/selected-copies/cover-005.svg",
+        "alt": "Francis Bebey Bissau cover",
+        "label": "Record cover",
+        "ratio": "square"
+      },
+      "rec_006": {
+        "photo_src": "./assets/selected-copies/cover-006.svg",
+        "sketch_src": "",
+        "src": "./assets/selected-copies/cover-006.svg",
+        "alt": "9th Creation Mellow Music cover",
+        "label": "Record cover",
+        "ratio": "square"
+      }
+    }
+  }
+}

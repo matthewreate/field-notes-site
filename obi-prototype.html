@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OBI Strip Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Newsreader:opsz,wght@6..72,400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,700,0..100,0..1;1,9..144,700,0..100,0..1&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { font-size: 16px; }
+
+    body {
+      margin: 0;
+      background: #f1ece6;
+      color: #1a1a1a;
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============================================
+       OBI STRIP
+       ============================================ */
+    .obi-strip {
+      position: fixed;
+      top: 0;
+      left: 12px;
+      width: 96px;
+      height: 100vh;
+      background: #c49a3a;
+      z-index: 50;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 16px 10px 32px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .obi-strip::-webkit-scrollbar { display: none; }
+
+    .obi-logo {
+      display: block;
+      width: 52px;
+      height: auto;
+      margin: 0 auto 14px;
+      opacity: 0.85;
+    }
+
+    .obi-rule {
+      border: none;
+      border-top: 1px solid rgba(26,26,26,0.25);
+      margin: 0 0 14px;
+    }
+
+    .obi-section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 5.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #1a1a1a;
+      opacity: 0.45;
+      margin: 0 0 8px;
+      display: block;
+    }
+
+    .obi-strip p {
+      font-family: 'Space Mono', monospace;
+      font-size: 6.5px;
+      font-weight: 400;
+      line-height: 1.65;
+      letter-spacing: 0.02em;
+      color: #1a1a1a;
+      opacity: 0.68;
+      margin: 0;
+      padding: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .obi-strip p.obi-venue {
+      font-weight: 700;
+      opacity: 0.85;
+      margin-top: 10px;
+    }
+
+    /* First venue in section — no extra top margin */
+    .obi-strip p.obi-venue:first-of-type {
+      margin-top: 0;
+    }
+
+    .obi-strip p.obi-vibe {
+      opacity: 0.52;
+      font-style: normal;
+      margin-bottom: 2px;
+    }
+
+    .obi-strip p.obi-dot {
+      opacity: 0.28;
+      font-size: 5px;
+      line-height: 2;
+      text-align: center;
+      letter-spacing: 0.3em;
+      margin: 4px 0;
+    }
+
+    /* Playlist links */
+    .obi-playlist {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 6.5px;
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      color: #1a1a1a;
+      opacity: 0.82;
+      text-decoration: none;
+      margin-top: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .obi-playlist:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .obi-playlist-desc {
+      font-family: 'Space Mono', monospace;
+      font-size: 6px;
+      font-weight: 400;
+      color: #1a1a1a;
+      opacity: 0.52;
+      display: block;
+      line-height: 1.5;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Hide on smaller screens */
+    @media (max-width: 960px) {
+      .obi-strip { display: none; }
+    }
+
+    /* ============================================
+       PAGE BODY
+       ============================================ */
+    .page-body {
+      max-width: 620px;
+      margin-left: calc(96px + 12px + 32px + max(0px, (100vw - 96px - 12px - 32px - 620px) / 2));
+      margin-right: auto;
+      padding: 0 20px;
+    }
+
+    /* ---- Simplified site content ---- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #f1ece6;
+      border-bottom: 2px solid #1a1a1a;
+      padding: 12px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .site-wordmark {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: #1a1a1a;
+    }
+    .site-nav a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: #1a1a1a;
+      margin-left: 24px;
+    }
+    .hero-thesis {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(2rem, 3vw + 1rem, 3rem);
+      line-height: 1.1;
+      margin: 48px 0 20px;
+      max-width: 480px;
+      background: #c4524a;
+      color: #f1ece6;
+      padding: 8px 14px;
+      display: inline-block;
+    }
+    .hero-copy {
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 55ch;
+      margin: 0 0 32px;
+    }
+    .section-head {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #6b6b6b;
+      margin: 56px 0 20px;
+    }
+    .entry {
+      border-top: 1px solid rgba(26,26,26,0.15);
+      padding: 24px 0;
+    }
+    .entry-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6b6b6b;
+      margin-bottom: 6px;
+    }
+    .entry h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 0.3vw + 1rem, 1.25rem);
+      margin: 0 0 8px;
+      line-height: 1.25;
+    }
+    .entry p { margin: 0; max-width: 55ch; }
+    .spacer { height: 600px; }
+    .footer {
+      border-top: 2px solid #1a1a1a;
+      padding: 20px 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: #6b6b6b;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+  </style>
+  <meta property="og:image" content="https://www.matthewreate.com/img/hero/dj-hero-room-photo-lg.webp">
+  <meta name="twitter:image" content="https://www.matthewreate.com/img/hero/dj-hero-room-photo-lg.webp">
+  <meta name="theme-color" content="#f1ece6">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 72'%3E%3Cpath d='M6 18 L74 18 L72 66 L8 66 Z' stroke='%231a1a1a' stroke-width='4' stroke-linejoin='round' fill='%23f1ece6'/%3E%3Cpath d='M7 30 L73 30 M7.5 42 L72.5 42 M8 54 L72 54' stroke='%231a1a1a' stroke-width='3'/%3E%3Cpath d='M20 18 L18 4 M35 18 L34 7 M50 18 L51 5 M62 18 L64 8' stroke='%231a1a1a' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ====== OBI STRIP ====== -->
+  <div class="obi-strip" aria-hidden="true">
+
+    <!-- Crate logo -->
+    <svg class="obi-logo" viewBox="0 0 80 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 18 L74 18 L72 66 L8 66 Z" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M7 30 L73 30" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M7.5 42 L72.5 42" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M8 54 L72 54" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M20 18 L18 4" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M35 18 L34 7" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M50 18 L51 5" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M62 18 L64 8" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+
+    <hr class="obi-rule">
+
+    <!-- ====== VENUES ====== -->
+    <span class="obi-section-label">Rooms</span>
+
+    <p class="obi-venue">Wythe Hotel</p>
+    <p class="obi-vibe">Williamsburg cool, big windows</p>
+
+    <p class="obi-venue">The Foundry</p>
+    <p class="obi-vibe">LIC industrial, great light</p>
+
+    <p class="obi-venue">Brooklyn Winery</p>
+    <p class="obi-vibe">Warm, low-ceiling, intimate</p>
+
+    <p class="obi-venue">Foxfire Mtn House</p>
+    <p class="obi-vibe">Catskills, moody, wooded</p>
+
+    <p class="obi-venue">Cedar Lakes Estate</p>
+    <p class="obi-vibe">Hudson Valley, outdoor magic</p>
+
+    <p class="obi-venue">Brooklyn Botanic</p>
+    <p class="obi-vibe">Garden ceremony, dreamy</p>
+
+    <p class="obi-venue">Prospect Park</p>
+    <p class="obi-vibe">Boathouse, lakeside, classic</p>
+
+    <p class="obi-venue">Rule of Thirds</p>
+    <p class="obi-vibe">Greenpoint, minimal, sharp</p>
+
+    <p class="obi-venue">The Hotel Chelsea</p>
+    <p class="obi-vibe">Rock history on the walls</p>
+
+    <p class="obi-venue">Celestine</p>
+    <p class="obi-vibe">DUMBO waterfront, clean</p>
+
+    <p class="obi-venue">TWA Hotel</p>
+    <p class="obi-vibe">Saarinen curves, mid-century</p>
+
+    <p class="obi-venue">Smack Mellon</p>
+    <p class="obi-vibe">DUMBO gallery, raw space</p>
+
+    <p class="obi-venue">Angel Orensanz</p>
+    <p class="obi-vibe">LES synagogue, cathedral scale</p>
+
+    <p class="obi-venue">The Capitol Theatre</p>
+    <p class="obi-vibe">Rock venue, Port Chester</p>
+
+    <p class="obi-venue">Laser Wolf Brooklyn</p>
+    <p class="obi-vibe">Rooftop, Israeli grill, loud</p>
+
+    <p class="obi-venue">Aurora Brooklyn</p>
+    <p class="obi-vibe">Cobble Hill, wood-fired warmth</p>
+
+    <p class="obi-venue">Buttermilk Falls</p>
+    <p class="obi-vibe">Hudson Valley inn, waterfalls</p>
+
+    <p class="obi-venue">Weekapaug Inn</p>
+    <p class="obi-vibe">RI coast, understated luxury</p>
+
+    <p class="obi-venue">Pilgrim Monument</p>
+    <p class="obi-vibe">Provincetown, end of the world</p>
+
+    <p class="obi-venue">Old Catskill</p>
+    <p class="obi-vibe">Abandoned zoo. Yes, really.</p>
+
+    <p class="obi-dot">. . .</p>
+
+    <!-- ====== PLAYLISTS ====== -->
+    <span class="obi-section-label">Listening</span>
+
+    <a class="obi-playlist" href="https://open.spotify.com/playlist/4FSTLjk9G7zL4dSz5mMyU3" target="_blank" rel="noreferrer">Magic 92.5</a>
+    <span class="obi-playlist-desc">Where the taste started</span>
+
+    <a class="obi-playlist" href="https://open.spotify.com/playlist/3k6Z9JKvrJkZyKzh1ksrfR" target="_blank" rel="noreferrer">World Vintage</a>
+    <span class="obi-playlist-desc">Global funk, worn grooves</span>
+
+    <a class="obi-playlist" href="https://open.spotify.com/playlist/3XDH7BiW7JRlFLGTQWigmS" target="_blank" rel="noreferrer">Philly</a>
+    <span class="obi-playlist-desc">Emma and I love Philly</span>
+
+  </div>
+
+  <!-- ====== PAGE CONTENT ====== -->
+  <div class="page-body">
+
+    <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-wordmark" href="index.html">Matthew Reate</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="field-notes.html">Archive</a>
+        <a href="notes/">Notes</a>
+        <a href="dj.html">DJ</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+    <section>
+      <h1 class="hero-thesis">Wedding DJ work for music nerds.</h1>
+      <p class="hero-copy">I'm Matthew — a record collector who DJs weddings in New York, New Jersey, and the Hudson Valley. About forty-five a year, from intimate dinner rooms to floors past two hundred.</p>
+    </section>
+
+    <p class="section-head">Latest</p>
+
+    <article class="entry">
+      <div class="entry-meta">2026-04 / Gig</div>
+      <h2>Wedding at Wythe Hotel</h2>
+      <p>A Williamsburg hotel wedding where the venue speakers weren't going to cut it, the couple was extremely chill, dinner was in a candlelit cellar, no mic needed, and the entire room raged through the full length of All My Friends.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-meta">2026-03-20 / Note</div>
+      <h2>Rare Groove Records That Work in Real Rooms</h2>
+      <p>Collector records that still work on people. Not the ones that sound good at home on headphones. The ones that move a room full of strangers who've never heard them before.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-meta">2026-03-10 / Note</div>
+      <h2>What Makes a Wedding Dance Floor Actually Work</h2>
+      <p>How a floor starts trusting itself. It's not about the first big song. It's about the three songs before it that gave people permission to move.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-meta">2026-02-18 / Note</div>
+      <h2>Why Dinner Music Is the Hardest DJ Set</h2>
+      <p>Dinner has to keep the room alive without competing with conversation. Too quiet and the energy dies. Too loud and the room fights you.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-meta">2025-09 / Gig</div>
+      <h2>Wedding at Englewood Field Club</h2>
+      <p>A split-location North Jersey wedding. Park ceremony, a Dennis Edwards dinner pivot that won over the old heads, and the last 45 minutes opened into millennial hip-hop.</p>
+    </article>
+
+    <div class="spacer"></div>
+
+    <footer class="footer">Matthew Reate / NTW</footer>
+
+  </div>
+
+</body>
+</html>
