@@ -2701,160 +2701,6 @@ body::before {
 }
 
 /* ============================================
-   OBI STRIP — fixed vertical sidebar
-   Japanese-style obi band, left edge.
-   left: 12px; width: 140px; gap: 32px → 184px offset
-   ============================================ */
-.obi-strip {
-  view-transition-name: obi-strip;
-  position: fixed;
-  top: 0;
-  left: 12px;
-  width: 140px;
-  height: 100vh;
-  background: #c49a3a;
-  z-index: 50;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 16px 10px 32px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  box-shadow: 6px 0 24px rgba(26,26,26,0.15);
-  border-right: 1.5px dashed rgba(26,26,26,0.22);
-}
-.obi-strip::-webkit-scrollbar { display: none; }
-
-.obi-logo {
-  display: block;
-  width: 52px;
-  height: auto;
-  margin: 0 auto 14px;
-  opacity: 0.85;
-}
-
-.obi-rule {
-  border: none;
-  border-top: 1px solid rgba(26,26,26,0.25);
-  margin: 0 0 14px;
-}
-
-.obi-section-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 5.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #1a1a1a;
-  opacity: 0.45;
-  margin: 0 0 8px;
-  display: block;
-}
-
-.obi-strip p {
-  font-family: 'Space Mono', monospace;
-  font-size: 6.5px;
-  font-weight: 400;
-  line-height: 1.65;
-  letter-spacing: 0.02em;
-  color: #1a1a1a;
-  opacity: 0.68;
-  margin: 0;
-  padding: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.obi-strip p.obi-venue {
-  font-weight: 700;
-  opacity: 0.85;
-  margin-top: 10px;
-}
-
-.obi-strip p.obi-venue:first-of-type {
-  margin-top: 0;
-}
-
-.obi-strip p.obi-vibe {
-  opacity: 0.52;
-  font-style: normal;
-  margin-bottom: 2px;
-}
-
-.obi-strip p.obi-dot {
-  opacity: 0.28;
-  font-size: 5px;
-  line-height: 2;
-  text-align: center;
-  letter-spacing: 0.3em;
-  margin: 4px 0;
-}
-
-.obi-playlist {
-  display: block;
-  font-family: 'Space Mono', monospace;
-  font-size: 6.5px;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  color: #1a1a1a;
-  opacity: 0.82;
-  text-decoration: none;
-  margin-top: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.obi-playlist:hover {
-  opacity: 1;
-  text-decoration: underline;
-}
-
-.obi-playlist-desc {
-  font-family: 'Space Mono', monospace;
-  font-size: 6px;
-  font-weight: 400;
-  color: #1a1a1a;
-  opacity: 0.52;
-  display: block;
-  line-height: 1.5;
-  margin-bottom: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Catalog number block — vinyl OBI style, bottom of strip content */
-.obi-catalog {
-  font-family: 'Space Mono', monospace;
-  font-size: 5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #1a1a1a;
-  opacity: 0.38;
-  text-align: center;
-  line-height: 1.9;
-  margin-top: 18px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(26,26,26,0.15);
-}
-
-@media (max-width: 960px) {
-  .obi-strip { display: none; }
-}
-
-/* Wide-screen page offset — clears the OBI strip */
-@media (min-width: 961px) {
-  .site-main,
-  .site-header-inner {
-    margin-left: calc(184px + max(0px, (100vw - 184px - 620px) / 2));
-    margin-right: auto;
-  }
-}
-
-/* ============================================
    SETLIST — per-phase track log (issue-004+).
    Zine liner-notes feel: paper-ink contrast,
    tight row rhythm, hairline dividers, mono meta.
@@ -3220,7 +3066,7 @@ body::before {
 
 /* ============================================
    VIEW TRANSITIONS — cross-page navigation
-   Header, wordmark, and OBI strip persist (no
+   Header and wordmark persist (no
    animation). Root fades out/in. Issue titles
    morph from feed h2 → page h1 by name match.
    Intentionally unlayered: targets browser-generated
@@ -3245,9 +3091,7 @@ body::before {
 ::view-transition-old(site-header),
 ::view-transition-new(site-header),
 ::view-transition-old(site-wordmark),
-::view-transition-new(site-wordmark),
-::view-transition-old(obi-strip),
-::view-transition-new(obi-strip) {
+::view-transition-new(site-wordmark) {
   animation: none;
 }
 
