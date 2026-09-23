@@ -58,8 +58,8 @@ td.n { width: 3.2em; padding-right: 0; text-align: right; white-space: nowrap; c
 /* Matthew's drawings. Crude on purpose. */
 img { max-width: 100%; height: auto; }
 .mark { display: block; width: 16em; margin: 0 0 1.4em -.3em; }
-h1 img.name { display: block; width: 12em; margin: 0 0 .1em -.15em; }
-header img.sig { display: block; width: 7.5em; margin-left: -.1em; }
+h1 img.name { display: block; width: 16em; margin: .2em 0 .3em -.4em; }
+header img.sig { display: block; width: 9em; margin-left: -.25em; }
 /* Heading doodles hang up into the white space above, so they add texture
    without pushing the text around. */
 h2 img.h { width: auto; height: 3.3em; margin: -2em 0 -.35em .45em; vertical-align: baseline; }
