@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="18" viewBox="0 0 1200 18">
-  <path d="M8 9 C 160 8, 320 10, 480 9 C 640 8, 800 10, 960 9 C 1080 8, 1160 10, 1192 9"
-        fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" opacity="0.85"/>
-  <path d="M8 10 C 160 9, 320 11, 480 10 C 640 9, 800 11, 960 10 C 1080 9, 1160 11, 1192 10"
-        fill="none" stroke="#111" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
-</svg>

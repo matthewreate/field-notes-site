@@ -1,0 +1,72 @@
+/* matthewreate.com — the whole design.
+   Ink on paper, one typeface, one size. Hierarchy comes from weight and
+   space, not decoration. If a rule isn't doing a job, it goes.
+   The face is Iowan Old Style (John Downer, 1990), already on every Apple
+   device, so nothing downloads. Palatino stands in on Windows. */
+
+:root {
+  color-scheme: light;
+  --ink: #1e1d1b;    /* almost black, a touch warm */
+  --paper: #faf9f5;  /* almost white, a touch warm */
+  --quiet: #6b6862;  /* data: dates, runtimes, BPM and key (5.3:1 on paper) */
+}
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 3.5em max(1.1em, 7vw) 5em;
+  background: var(--paper);
+  color: var(--ink);
+  font: 19px/1.5 "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
+  text-wrap: pretty;
+}
+
+header, main, footer { max-width: 34em; }
+header { margin-bottom: 3em; }
+footer { margin-top: 4.5em; }
+
+a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: .15em; }
+a:hover { text-decoration-thickness: 2px; }
+main a:visited { color: var(--quiet); }
+
+h1, h2, h3 { font-size: 1em; line-height: inherit; margin: 2.4em 0 .5em; }
+h1 { margin-top: 0; }
+h3 { margin-top: 1.8em; }
+
+p, ul, ol, table, blockquote { margin: 0 0 1em; }
+ul, ol { padding-left: 1.6em; }
+blockquote { margin-left: 1.6em; }
+hr { border: 0; border-top: 1px solid var(--ink); margin: 2.5em 0; }
+a[href^="tel:"] { white-space: nowrap; }  /* never 917-586- / 6753 */
+audio { display: block; width: 100%; margin: 1em 0; }
+
+/* Gray is data (dates, counts, BPM and key). Italic is a note in my voice. */
+.m { color: var(--quiet); }
+time, .m, table, ol { font-variant-numeric: tabular-nums; }
+
+/* Tracklists run long, so they get room for three-digit numbers. */
+ol.t { padding-left: 2.4em; }
+ol.t i { display: block; }
+
+/* Index lists: date, title, runtime. */
+table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+td { padding: 0 1em 0 0; vertical-align: top; }
+td:first-child { width: 3.9em; white-space: nowrap; color: var(--quiet); }
+td.n { width: 3.2em; padding-right: 0; text-align: right; white-space: nowrap; color: var(--quiet); }
+
+/* Gig photos: swipe, or click a photo for the next one. No captions. */
+main:has(.photos) { max-width: 60em; }
+.photos { display: flex; gap: .5em; overflow-x: auto; scroll-snap-type: x mandatory;
+  scroll-behavior: smooth; overscroll-behavior-x: contain; }
+.photos a { flex: 0 0 100%; scroll-snap-align: center; scroll-margin-top: 1em; }
+.photos img { display: block; width: 100%; height: min(82vh, 52em); object-fit: contain; }
+@media (prefers-reduced-motion: reduce) { .photos { scroll-behavior: auto; } }
+
+::selection { background: var(--ink); color: var(--paper); }
+:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+
+@media (max-width: 40em) {
+  body { font-size: 17px; padding-top: 2em; }
+  td { padding-right: .8em; }
+}

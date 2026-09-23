@@ -1,60 +1,27 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <title>Not Found | Field Notes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Display&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Not Found | Matthew Reate</title>
+<link rel="stylesheet" href="/site.css">
 </head>
 <body>
-  <main class="page-shell" style="max-width:42rem;margin:0 auto;padding:6rem 1.5rem;">
-    <p style="text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;opacity:.6;">404</p>
-    <h1 style="font-family:'Libre Caslon Display',serif;font-weight:400;margin:.5rem 0 1rem;">
-      That page isn&rsquo;t here.
-    </h1>
-    <p id="fallback">
-      Issue pages were renamed. Try the
-      <a href="/">archive index</a>, or the <a href="/field-notes.html">issue list</a>.
-    </p>
-    <p id="redirecting" hidden>Taking you to the right issue&hellip;</p>
-  </main>
-
-  <!--
-    Old issue URLs contained couple first names and were retired in August 2026
-    (see "ANONYMIZATION — Project Brief.md"). Inbound links to them still need
-    to land, but re-listing the old slugs here would republish exactly the
-    names the rename removed. So _redirects.json stores only a truncated
-    SHA-256 of each retired path. We hash the requested path and look it up:
-    old links resolve, and no couple name exists anywhere in this repo.
-  -->
-  <script>
-  (async () => {
-    const path = location.pathname.replace(/\/+$/, "") + "/";
-    try {
-      const digest = await crypto.subtle.digest(
-        "SHA-256",
-        new TextEncoder().encode(path)
-      );
-      const key = Array.from(new Uint8Array(digest))
-        .map((b) => b.toString(16).padStart(2, "0"))
-        .join("")
-        .slice(0, 16);
-      const map = await fetch("/_redirects.json").then((r) => r.json());
-      const target = map[key];
-      if (target) {
-        document.getElementById("fallback").hidden = true;
-        document.getElementById("redirecting").hidden = false;
-        location.replace("/issues/" + target + "/");
-      }
-    } catch (err) {
-      /* No crypto.subtle over plain HTTP, or the map is missing.
-         The static fallback copy above is already correct. */
-    }
-  })();
-  </script>
+<header><a href="/">Matthew Reate</a></header>
+<main>
+<h1>That page isn’t here.</h1>
+<p>Try <a href="/">the front page</a>.</p>
+</main>
+<!--
+  The gig logs under /issues/ and the essays under /notes/ were retired in
+  September 2026, and the older issue URLs (retired in August 2026) contained
+  couple first names. Instagram and search still link to all of them, so those
+  paths go to the front page instead of dead-ending here. Nothing else on the
+  site needs a script.
+-->
+<script>
+if (/^\/(issues|notes)\//.test(location.pathname)) location.replace("/");
+</script>
 </body>
 </html>
