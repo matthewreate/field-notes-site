@@ -53,13 +53,20 @@ time, .m, ol { font-variant-numeric: tabular-nums; }
 ol.t { padding-left: 2.4em; }
 ol.t i { display: block; }
 
-/* Index rows: date, title, runtime, and the whole row is the link. */
+/* Index rows: date, title, runtime. The play button plays the mix in place,
+   and the runtime becomes a running clock. */
 ul.rows { list-style: none; padding: 0; }
-.rows a { display: grid; grid-template-columns: 3.9em minmax(0, 1fr) auto; column-gap: 1em;
-  text-decoration: none; }
+.rows li { display: grid; grid-template-columns: 3.9em minmax(0, 1fr) auto; column-gap: 1em; }
 .rows time, .rows .n { color: var(--quiet); font-variant-numeric: tabular-nums; }
-.rows .t { text-decoration: underline 1px var(--rule); text-underline-offset: .15em; }
-.rows a:hover .t { text-decoration-color: currentColor; }
+.rows .n { white-space: nowrap; }
+/* Generous hit area for thumbs; the negative margin keeps it from moving the text. */
+.play { border: 0; background: none; padding: .45em .45em .45em .6em; margin: -.45em 0 -.45em -.6em;
+  font: inherit; font-size: .8em; color: var(--ink); cursor: pointer; line-height: 1; }
+.play img { height: 1.45em; width: auto; vertical-align: -.3em; }
+.play .i-pause, .rows li.on .play .i-play { display: none; }
+.rows li.on .play .i-pause { display: inline; }
+.rows li.on .clock { color: var(--ink); }
+.rows li.on .t { text-decoration-color: currentColor; }
 
 /* Matthew's drawings. Crude on purpose. */
 img { max-width: 100%; height: auto; }
@@ -67,11 +74,25 @@ h1 img.name { display: block; width: 16em; margin: .2em 0 .3em -.4em; }
 header img.sig { display: block; width: 9em; margin-left: -.25em; }
 .lede .mark { display: block; width: 11em; margin: 1em 0 1.2em -.2em; }
 .motto { font-style: italic; margin: 0 0 .7em; }
+h2 img.label { height: 1.9em; width: auto; vertical-align: -.5em; }  /* crate dividers */
+.lost { display: block; width: 12em; margin: 0 0 1.5em -.2em; }
 .signoff { display: block; width: 3.2em; margin: 0 0 .8em -.15em; }
 /* Heading doodles hang up into the white space above, so they add texture
    without pushing the text around. */
-h2 img.h { width: auto; height: calc(3.3em * var(--s, 1)); vertical-align: baseline;
-  margin: calc(1.3em - 3.3em * var(--s, 1)) 0 -.35em .45em; }
+h2 img.h, h2 .dd { vertical-align: baseline; margin: calc(1.3em - 3.3em * var(--s, 1)) 0 -.35em .45em; }
+h2 img.h { width: auto; height: calc(3.3em * var(--s, 1)); }
+/* A drawing with a colored-in twin: ink at rest, color when you point at its
+   section. Only where there's a pointer to point with; phones stay ink. */
+h2 .dd { display: inline-block; position: relative; }
+h2 .dd > img.h { display: block; margin: 0; }
+h2 .dd > img { transition: opacity .35s ease; }
+h2 .dd > img.color { position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  opacity: 0; }  /* exactly over the ink drawing; the two crossfade */
+@media (hover: hover) {
+  section:hover .dd > img.color { opacity: 1; }
+  section:hover .dd > img:not(.color) { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { h2 .dd > img { transition: none; } }
 h2:has(img.h) { margin-top: calc(1.5em + 2.1em * var(--s, 1)); }
 
 /* Wide screens: section labels and drawings move to a left rail, like the
@@ -84,7 +105,11 @@ h2:has(img.h) { margin-top: calc(1.5em + 2.1em * var(--s, 1)); }
   main > section > :not(h2, .rail) { grid-column: 2; grid-row: 1; }
   main > section.lede { margin-top: 2em; }
   .lede .mark { width: 100%; margin: .15em 0 0 -.2em; }
-  h2 img.h { display: block; height: calc(3.8em * var(--s, 1)); margin: .7em 0 0 -.1em; }
+  h2 img.h, h2 .dd { display: block; margin: .7em 0 0 -.1em; }
+  h2 img.h { height: calc(3.8em * var(--s, 1)); }
+  h2 .dd > img.h { margin: 0; }
+  h2 .dd { width: fit-content; }  /* hug the drawing, not the whole rail */
+  h2 img.label { display: block; vertical-align: 0; margin: -.2em 0 0 -.15em; }
   main > section > h2:has(img.h) { margin: 0; }  /* the narrow-screen headroom doesn't apply here */
   body:has(main > section) footer { margin-left: 11.5em; }
 }
@@ -102,5 +127,5 @@ main:has(.photos) { max-width: 60em; }
 
 @media (max-width: 40em) {
   body { font-size: 17px; padding-top: 2em; }
-  .rows a { column-gap: .8em; }
+  .rows li { column-gap: .8em; }
 }
