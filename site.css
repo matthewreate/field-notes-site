@@ -55,6 +55,16 @@ td { padding: 0 1em 0 0; vertical-align: top; }
 td:first-child { width: 3.9em; white-space: nowrap; color: var(--quiet); }
 td.n { width: 3.2em; padding-right: 0; text-align: right; white-space: nowrap; color: var(--quiet); }
 
+/* Matthew's drawings. Crude on purpose. */
+img { max-width: 100%; height: auto; }
+.mark { display: block; width: 16em; margin: 0 0 1.4em -.3em; }
+h1 img.name { display: block; width: 12em; margin: 0 0 .1em -.15em; }
+header img.sig { display: block; width: 7.5em; margin-left: -.1em; }
+/* Heading doodles hang up into the white space above, so they add texture
+   without pushing the text around. */
+h2 img.h { width: auto; height: 3.3em; margin: -2em 0 -.35em .45em; vertical-align: baseline; }
+h2:has(img.h) { margin-top: 3.2em; }
+
 /* Gig photos: swipe, or click a photo for the next one. No captions. */
 main:has(.photos) { max-width: 60em; }
 .photos { display: flex; gap: .5em; overflow-x: auto; scroll-snap-type: x mandatory;
