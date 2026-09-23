@@ -9,6 +9,7 @@
   --ink: #1e1d1b;    /* almost black, a touch warm */
   --paper: #faf9f5;  /* almost white, a touch warm */
   --quiet: #6b6862;  /* data: dates, runtimes, BPM and key (5.3:1 on paper) */
+  --rule: color-mix(in srgb, var(--ink) 32%, transparent);  /* resting underline */
 }
 
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
@@ -24,17 +25,20 @@ body {
 
 header, main, footer { max-width: 34em; }
 header { margin-bottom: 3em; }
-footer { margin-top: 4.5em; }
+footer { margin-top: 5em; }
+footer p { margin: 0 0 .25em; }
 
-a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: .15em; }
-a:hover { text-decoration-thickness: 2px; }
+/* Links keep the early-web underline, just quieter until you point at them. */
+a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: .15em;
+  text-decoration-color: var(--rule); }
+a:hover { text-decoration-color: currentColor; }
 main a:visited { color: var(--quiet); }
 
 h1, h2, h3 { font-size: 1em; line-height: inherit; margin: 2.4em 0 .5em; }
 h1 { margin-top: 0; }
 h3 { margin-top: 1.8em; }
 
-p, ul, ol, table, blockquote { margin: 0 0 1em; }
+p, ul, ol, blockquote { margin: 0 0 1em; }
 ul, ol { padding-left: 1.6em; }
 blockquote { margin-left: 1.6em; }
 hr { border: 0; border-top: 1px solid var(--ink); margin: 2.5em 0; }
@@ -43,27 +47,46 @@ audio { display: block; width: 100%; margin: 1em 0; }
 
 /* Gray is data (dates, counts, BPM and key). Italic is a note in my voice. */
 .m { color: var(--quiet); }
-time, .m, table, ol { font-variant-numeric: tabular-nums; }
+time, .m, ol { font-variant-numeric: tabular-nums; }
 
 /* Tracklists run long, so they get room for three-digit numbers. */
 ol.t { padding-left: 2.4em; }
 ol.t i { display: block; }
 
-/* Index lists: date, title, runtime. */
-table { border-collapse: collapse; width: 100%; table-layout: fixed; }
-td { padding: 0 1em 0 0; vertical-align: top; }
-td:first-child { width: 3.9em; white-space: nowrap; color: var(--quiet); }
-td.n { width: 3.2em; padding-right: 0; text-align: right; white-space: nowrap; color: var(--quiet); }
+/* Index rows: date, title, runtime, and the whole row is the link. */
+ul.rows { list-style: none; padding: 0; }
+.rows a { display: grid; grid-template-columns: 3.9em minmax(0, 1fr) auto; column-gap: 1em;
+  text-decoration: none; }
+.rows time, .rows .n { color: var(--quiet); font-variant-numeric: tabular-nums; }
+.rows .t { text-decoration: underline 1px var(--rule); text-underline-offset: .15em; }
+.rows a:hover .t { text-decoration-color: currentColor; }
 
 /* Matthew's drawings. Crude on purpose. */
 img { max-width: 100%; height: auto; }
-.mark { display: block; width: 16em; margin: 0 0 1.4em -.3em; }
 h1 img.name { display: block; width: 16em; margin: .2em 0 .3em -.4em; }
 header img.sig { display: block; width: 9em; margin-left: -.25em; }
+.lede .mark { display: block; width: 11em; margin: 1em 0 1.2em -.2em; }
+.signoff { display: block; width: 3.2em; margin: 0 0 .8em -.15em; }
 /* Heading doodles hang up into the white space above, so they add texture
    without pushing the text around. */
-h2 img.h { width: auto; height: 3.3em; margin: -2em 0 -.35em .45em; vertical-align: baseline; }
-h2:has(img.h) { margin-top: 3.2em; }
+h2 img.h { width: auto; height: calc(3.3em * var(--s, 1)); vertical-align: baseline;
+  margin: calc(1.3em - 3.3em * var(--s, 1)) 0 -.35em .45em; }
+h2:has(img.h) { margin-top: calc(1.5em + 2.1em * var(--s, 1)); }
+
+/* Wide screens: section labels and drawings move to a left rail, like the
+   credits on the back of a sleeve, and the page uses its width. */
+@media (min-width: 56em) {
+  main:has(> section) { max-width: 47em; }
+  main > section { display: grid; grid-template-columns: 9em minmax(0, 1fr); column-gap: 2.5em;
+    margin-top: 3.4em; }
+  main > section > h2, main > section > .rail { grid-column: 1; grid-row: 1; margin: 0; }
+  main > section > :not(h2, .rail) { grid-column: 2; grid-row: 1; }
+  main > section.lede { margin-top: 2em; }
+  .lede .mark { width: 100%; margin: .15em 0 0 -.2em; }
+  h2 img.h { display: block; height: calc(3.8em * var(--s, 1)); margin: .7em 0 0 -.1em; }
+  main > section > h2:has(img.h) { margin: 0; }  /* the narrow-screen headroom doesn't apply here */
+  body:has(main > section) footer { margin-left: 11.5em; }
+}
 
 /* Gig photos: swipe, or click a photo for the next one. No captions. */
 main:has(.photos) { max-width: 60em; }
@@ -78,5 +101,5 @@ main:has(.photos) { max-width: 60em; }
 
 @media (max-width: 40em) {
   body { font-size: 17px; padding-top: 2em; }
-  td { padding-right: .8em; }
+  .rows a { column-gap: .8em; }
 }
