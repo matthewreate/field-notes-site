@@ -66,6 +66,7 @@ img { max-width: 100%; height: auto; }
 h1 img.name { display: block; width: 16em; margin: .2em 0 .3em -.4em; }
 header img.sig { display: block; width: 9em; margin-left: -.25em; }
 .lede .mark { display: block; width: 11em; margin: 1em 0 1.2em -.2em; }
+.motto { font-style: italic; margin: 0 0 .7em; }
 .signoff { display: block; width: 3.2em; margin: 0 0 .8em -.15em; }
 /* Heading doodles hang up into the white space above, so they add texture
    without pushing the text around. */
