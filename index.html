@@ -14,7 +14,7 @@
 <link rel="icon" type="image/png" href="doodles/icon.png?v=62b07ee9">
 <link rel="apple-touch-icon" href="doodles/apple-touch-icon.png?v=b989ba3c">
 <meta property="og:image" content="https://www.matthewreate.com/doodles/share.png?v=8b041c27">
-<link rel="stylesheet" href="site.css?v=b63325bb">
+<link rel="stylesheet" href="site.css?v=727ba800">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -110,6 +110,26 @@
   audio.addEventListener("pause", () => row && row.classList.remove("on"));
   audio.addEventListener("timeupdate", () => row && (row.querySelector(".clock").textContent = clock(audio.currentTime)));
   audio.addEventListener("ended", () => { if (row) reset(row); row = null; });
+  // A mix's own page: the drawn button, an ink line to drag, and a clock.
+  for (const p of document.querySelectorAll(".player")) {
+    const a = p.querySelector("audio"), button = p.querySelector(".play");
+    const seek = p.querySelector(".seek"), now = p.querySelector(".now");
+    a.removeAttribute("controls");
+    for (const el of p.querySelectorAll("[hidden]")) el.hidden = false;
+    const paint = () => {
+      const length = a.duration || +seek.max;
+      now.textContent = clock(a.currentTime);
+      seek.value = a.currentTime;
+      seek.setAttribute("aria-valuetext", now.textContent);
+      seek.style.setProperty("--p", `${length ? a.currentTime / length * 100 : 0}%`);
+    };
+    button.addEventListener("click", () => a.paused ? a.play() : a.pause());
+    seek.addEventListener("input", () => { a.currentTime = +seek.value; paint(); });
+    a.addEventListener("loadedmetadata", () => { seek.max = a.duration; paint(); });
+    a.addEventListener("timeupdate", paint);
+    a.addEventListener("play", () => { p.classList.add("on"); button.setAttribute("aria-label", "Pause"); });
+    a.addEventListener("pause", () => { p.classList.remove("on"); button.setAttribute("aria-label", "Play"); });
+  }
 })();
 </script>
 </div>

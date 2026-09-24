@@ -63,10 +63,27 @@ ul.rows { list-style: none; padding: 0; }
 .play { border: 0; background: none; padding: .45em .45em .45em .6em; margin: -.45em 0 -.45em -.6em;
   font: inherit; font-size: .8em; color: var(--ink); cursor: pointer; line-height: 1; }
 .play img { height: 1.45em; width: auto; vertical-align: -.3em; }
-.play .i-pause, .rows li.on .play .i-play { display: none; }
-.rows li.on .play .i-pause { display: inline; }
+.play .i-pause, .rows li.on .play .i-play, .player.on .play .i-play { display: none; }
+.rows li.on .play .i-pause, .player.on .play .i-pause { display: inline; }
 .rows li.on .clock { color: var(--ink); }
 .rows li.on .t { text-decoration-color: currentColor; }
+
+/* A mix's own page: the same drawn button, an ink line you can drag, and the
+   clock. Without JavaScript the browser's own player shows instead. */
+.player { display: flex; align-items: center; column-gap: .9em; margin: 1.4em 0 1.8em; }
+.player .play { font-size: 1.1em; }
+.player .clock { color: var(--quiet); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.player.on .now { color: var(--ink); }
+.player audio:not([controls]) { display: none; }
+.seek { flex: 1; min-width: 3em; height: 1.6em; margin: 0; background: none; cursor: pointer;
+  -webkit-appearance: none; appearance: none; }
+.seek::-webkit-slider-runnable-track { height: 1px; border: 0;
+  background: linear-gradient(var(--ink), var(--ink)) 0 0 / var(--p, 0%) 100% no-repeat, var(--rule); }
+.seek::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: .5em; height: .5em;
+  margin-top: calc(.5px - .25em); border: 0; border-radius: 50%; background: var(--ink); }
+.seek::-moz-range-track { height: 1px; border: 0; background: var(--rule); }
+.seek::-moz-range-progress { height: 1px; background: var(--ink); }
+.seek::-moz-range-thumb { width: .5em; height: .5em; border: 0; border-radius: 50%; background: var(--ink); }
 
 /* Matthew's drawings. Crude on purpose. */
 img { max-width: 100%; height: auto; }

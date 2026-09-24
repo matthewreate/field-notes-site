@@ -14,15 +14,20 @@
 <link rel="icon" type="image/png" href="../doodles/icon.png?v=62b07ee9">
 <link rel="apple-touch-icon" href="../doodles/apple-touch-icon.png?v=b989ba3c">
 <meta property="og:image" content="https://www.matthewreate.com/doodles/share.png?v=8b041c27">
-<link rel="stylesheet" href="../site.css?v=b63325bb">
+<link rel="stylesheet" href="../site.css?v=727ba800">
 </head>
 <body>
 <header><a href="../"><img class="sig" src="../doodles/signature.png?v=5de204cc" width="171" height="67" alt="Matthew Reate"></a></header>
 <main>
 <h1>Wine Bar Dinner</h1>
 <p>A wine bar dinner mix, recorded in one pass.</p>
-<p class="m"><time datetime="2026-04-27">April 27, 2026</time>, 40:33. First draft, no edits.</p>
+<p class="m"><time datetime="2026-04">April 2026</time></p>
+<div class="player">
 <audio controls preload="none" src="https://pub-67f7093beab94c4c96e1858a443fbe71.r2.dev/mixes/Wine%20Bar%20Dinner.m4a"></audio>
+<button class="play" type="button" hidden aria-label="Play"><span class="i-play"><img class="btn" src="../doodles/play.png?v=8547c7b6" width="19" height="18" alt=""></span><span class="i-pause"><img class="btn" src="../doodles/pause.png?v=2b24e819" width="15" height="18" alt=""></span></button>
+<input class="seek" type="range" min="0" max="2433" step="1" value="0" aria-label="Seek" hidden>
+<span class="clock" hidden><span class="now">0:00</span> / 40:33</span>
+</div>
 <p>First draft. Slow ramp, off the top of my head, single take. The small transition errors are left where they landed.</p>
 <p>Soul, brazilian, and rare groove records. Built for a wine bar pocket more than a wedding tent.</p>
 <h2>Tracklist</h2>
@@ -48,6 +53,48 @@
 <li>The Esquires – Get On Up <span class="m">119 11B</span></li>
 <li>The Love Unlimited Orchestra – Barry’s Theme <span class="m">121 7B</span></li>
 </ol>
+
+<script>
+(() => {
+  const audio = new Audio(); let row = null;
+  const clock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  const reset = li => { li.classList.remove("on"); li.querySelector(".clock").textContent = li.dataset.runtime; };
+  for (const li of document.querySelectorAll(".rows li[data-src]")) {
+    const button = li.querySelector(".play");
+    if (!button) continue;
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      if (row === li && !audio.paused) return audio.pause();
+      if (row !== li) { if (row) reset(row); row = li; audio.src = li.dataset.src; }
+      audio.play();
+    });
+  }
+  audio.addEventListener("play", () => row && row.classList.add("on"));
+  audio.addEventListener("pause", () => row && row.classList.remove("on"));
+  audio.addEventListener("timeupdate", () => row && (row.querySelector(".clock").textContent = clock(audio.currentTime)));
+  audio.addEventListener("ended", () => { if (row) reset(row); row = null; });
+  // A mix's own page: the drawn button, an ink line to drag, and a clock.
+  for (const p of document.querySelectorAll(".player")) {
+    const a = p.querySelector("audio"), button = p.querySelector(".play");
+    const seek = p.querySelector(".seek"), now = p.querySelector(".now");
+    a.removeAttribute("controls");
+    for (const el of p.querySelectorAll("[hidden]")) el.hidden = false;
+    const paint = () => {
+      const length = a.duration || +seek.max;
+      now.textContent = clock(a.currentTime);
+      seek.value = a.currentTime;
+      seek.setAttribute("aria-valuetext", now.textContent);
+      seek.style.setProperty("--p", `${length ? a.currentTime / length * 100 : 0}%`);
+    };
+    button.addEventListener("click", () => a.paused ? a.play() : a.pause());
+    seek.addEventListener("input", () => { a.currentTime = +seek.value; paint(); });
+    a.addEventListener("loadedmetadata", () => { seek.max = a.duration; paint(); });
+    a.addEventListener("timeupdate", paint);
+    a.addEventListener("play", () => { p.classList.add("on"); button.setAttribute("aria-label", "Pause"); });
+    a.addEventListener("pause", () => { p.classList.remove("on"); button.setAttribute("aria-label", "Play"); });
+  }
+})();
+</script>
 </main>
 <footer>
 <p>Weddings booked through <a href="https://www.ntweddingdjs.com/matthew">Non-Traditional Wedding DJs</a>.</p>
