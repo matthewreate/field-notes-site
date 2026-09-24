@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1e1d1b">
+<title>Wilma | Matthew Reate</title>
+<link rel="icon" type="image/png" href="../doodles/icon.png">
+<link rel="preconnect" href="https://i.imgur.com">
+<!--
+  Wilma's page. A secret: no nav link, not in the sitemap, noindex. The way in
+  is typing w-i-l-m-a anywhere on the site (key.js), the little wagon in the
+  footer, or /wilma. Everything it needs lives in this folder, and nothing
+  else on the site depends on it.
+
+  The photos, captions, odometer and radio presets are in build-log.js.
+  The style and the script are inline on purpose: GitHub Pages caches files
+  for ten minutes, and one file can't go stale against itself.
+-->
+<script>
+  // The film leader plays unless the visitor asked for less motion. The dash
+  // stays hidden behind it, with a failsafe so a broken script can't keep it hidden.
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("intro");
+    setTimeout(() => document.documentElement.classList.remove("intro"), 6000);
+  }
+</script>
+<style>
+/* The site's ink and paper, flipped: the lights are off and you're in the car. */
+:root {
+  color-scheme: dark;
+  --ink: #1e1d1b;
+  --paper: #faf9f5;
+  --quiet: #a39f96;
+  --plastic: #121211;
+  --face: #0b0b0a;
+  --unlit: #3a3833;
+  --lit: #efeae0;
+  --needle: #ff5b24;
+  --amber: #ffb03b;
+  --serif: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --side: max(16px, env(safe-area-inset-left));
+}
+* { box-sizing: border-box; }
+html { background: var(--ink); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html.intro { background: #000; }
+html.intro body > main { visibility: hidden; }
+body { margin: 0; background: var(--ink); color: var(--paper); font: 19px/1.5 var(--serif); overflow-x: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+a { color: var(--paper); text-decoration-thickness: 1px; text-underline-offset: .15em;
+  text-decoration-color: color-mix(in srgb, var(--paper) 40%, transparent); }
+a:hover { text-decoration-color: currentColor; }
+.m { color: var(--quiet); font-variant-numeric: tabular-nums; }
+h1, h2 { font-size: 1em; line-height: inherit; margin: 0; }
+
+/* ---- The dash: a strip of wood, the binnacle hanging under it. ---- */
+.wood {
+  position: relative; display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; min-height: 78px; padding: 12px var(--side);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='120'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .14' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.6' intercept='-.75'/%3E%3C/feComponentTransfer%3E%3CfeColorMatrix values='.34 0 0 0 .26 .2 0 0 0 .14 .1 0 0 0 .07 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E") 0 0 / 900px 100% repeat-x, #5b3a22;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 0 -2px 4px rgba(0,0,0,.5), 0 3px 8px rgba(0,0,0,.55);
+  z-index: 1;
+}
+.wood::after { /* the lacquer */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,236,210,.2), rgba(255,236,210,0) 42%, rgba(0,0,0,.2));
+}
+.plaque {
+  position: relative; z-index: 1; padding: 6px 14px; border-radius: 3px; text-align: center;
+  font: 700 9px/1.4 var(--sans); letter-spacing: .14em; color: #2a2a28; text-shadow: 0 1px 0 rgba(255,255,255,.55);
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,.07) 0 1px, rgba(0,0,0,.05) 1px 2px),
+    linear-gradient(180deg, #e2e3e0, #a8aba7 55%, #cfd1cd);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8), inset 0 -1px 0 rgba(0,0,0,.25), 0 1px 3px rgba(0,0,0,.6);
+}
+.plaque b { display: block; font-size: 11px; letter-spacing: .1em; }
+.hazard {
+  position: relative; z-index: 1; flex: none; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 7px;
+  display: grid; place-items: center; background: linear-gradient(#2d2d2b, #141413);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 0 0 1px #000, 0 2px 5px rgba(0,0,0,.6);
+}
+.hazard svg { width: 28px; height: 28px; }
+.hazard path { fill: none; stroke: #a8342a; stroke-width: 2.2; stroke-linejoin: round; }
+.hazard[aria-pressed="true"] { box-shadow: inset 0 3px 6px rgba(0,0,0,.85), 0 0 0 1px #000; }
+.blink .hazard path { stroke: #ff5a45; filter: drop-shadow(0 0 4px #ff3b2e); }
+
+.cluster {
+  position: relative; margin: 0 10px; padding: 26px 12px 22px; text-align: center;
+  background: radial-gradient(120% 90% at 50% 0%, #1f1e1c, var(--plastic) 70%);
+  border-radius: 0 0 34px 34px; box-shadow: inset 0 12px 20px rgba(0,0,0,.75), 0 10px 24px rgba(0,0,0,.35);
+}
+.gauge { position: relative; }
+.gauge svg { display: block; width: 100%; height: auto; }
+.speedo { width: min(76vw, 300px); margin: 0 auto; }
+.row { display: flex; justify-content: center; gap: 4%; margin-top: 14px; }
+.row .gauge { width: 30%; max-width: 118px; }
+.bezel { fill: #262523; }
+.rim { fill: none; stroke: rgba(255,255,255,.08); }
+.face { fill: var(--face); }
+.tick { stroke: var(--unlit); stroke-width: 1.3; transition: stroke .4s; }
+.tick.major { stroke-width: 2.8; }
+.num, .cap { fill: var(--unlit); font-family: var(--sans); text-anchor: middle; dominant-baseline: central; transition: fill .4s; }
+.num { font-size: 15px; font-weight: 700; }
+.cap { font-size: 8.5px; font-weight: 700; letter-spacing: .16em; }
+.row .num { font-size: 19px; }
+.row .cap { font-size: 13px; }
+.zone { fill: none; stroke: #4a1d17; stroke-width: 7; transition: stroke .4s; }
+.on .tick { stroke: var(--lit); }
+.on .num, .on .cap { fill: var(--lit); }
+.on .zone { stroke: #d2402f; }
+.needle { --r: 0deg; transform: rotate(var(--r)); transform-origin: 100px 100px;
+  transition: transform 1.3s cubic-bezier(.2,.9,.25,1.2); }
+.needle path { fill: var(--needle); }
+.temp .needle { transition-duration: 7s; transition-timing-function: cubic-bezier(.35,.1,.2,1); }
+.needle.idle { animation: idle .34s linear infinite; }
+@keyframes idle {
+  0%, 100% { transform: rotate(var(--r)); }
+  35% { transform: rotate(calc(var(--r) + .45deg)); }
+  70% { transform: rotate(calc(var(--r) - .15deg)); }
+}
+.hub { fill: #1c1b19; stroke: #000; }
+.notach { position: absolute; inset: 0; display: grid; place-items: center;
+  font: italic 15px/1 var(--serif); color: var(--quiet); }
+.note { margin: 14px auto 0; max-width: 22em; font: italic 15px/1.35 var(--serif); color: var(--quiet); }
+
+/* Turn signals, lit by the hazards. */
+.blinker { position: absolute; top: 2%; width: 20px; height: 16px; background: #173720; }
+.blinker.l { left: 0; clip-path: polygon(0 50%, 50% 0, 50% 30%, 100% 30%, 100% 70%, 50% 70%, 50% 100%); }
+.blinker.r { right: 0; clip-path: polygon(100% 50%, 50% 0, 50% 30%, 0 30%, 0 70%, 50% 70%, 50% 100%); }
+.blink .blinker { background: #69e886; filter: drop-shadow(0 0 5px #3fd463); }
+
+/* The odometer and trip meter: drums that roll. */
+.counters { position: absolute; left: 0; right: 0; top: 61%; display: grid; justify-items: center; gap: 5px; }
+.counter { display: inline-flex; gap: 1px; padding: 2px; border-radius: 2px; background: #050505;
+  box-shadow: 0 0 0 1px #2c2b28, inset 0 1px 2px #000; font: 500 13px/1 var(--mono); }
+.trip { font-size: 10.5px; align-items: center; }
+.trip small { font: 700 7px var(--sans); letter-spacing: .14em; color: var(--unlit); padding: 0 4px 0 3px; transition: color .4s; }
+.on .trip small { color: var(--lit); }
+.drum { display: block; width: .82em; height: 1.25em; overflow: hidden; color: #e9e5da;
+  background: linear-gradient(#000, #1d1d1b 32%, #1d1d1b 68%, #000); }
+.drum.tenth { color: #141414; background: linear-gradient(#8e8b85, #efece5 32%, #efece5 68%, #8e8b85); }
+.reel { display: block; transform: translateY(calc(var(--d, 0) * -1.25em)); transition: transform .8s cubic-bezier(.4,.1,.3,1); }
+.reel i { display: block; height: 1.25em; line-height: 1.25em; font-style: normal; text-align: center; }
+
+/* ---- Her name, in the site's own voice. ---- */
+.lede { max-width: 34em; margin: 0 auto; padding: 38px var(--side) 0; }
+.lede p { margin: .15em 0 0; }
+/* His drawing of her, on its own bit of paper. */
+.sketch { display: block; width: min(74vw, 300px); height: auto; margin: 0 0 26px -3px; padding: 12px 14px;
+  background: var(--paper); border-radius: 2px; transform: rotate(-2deg); box-shadow: 0 10px 26px rgba(0,0,0,.5); }
+
+/* ---- The build log: a strip of 35mm, to scale. 24mm tall frames, 5.5mm
+   edges, a perforation every 4.75mm. Newest frame first. ---- */
+.log { margin-top: 40px; }
+.log header { max-width: 34em; margin: 0 auto 14px; padding: 0 var(--side); }
+.strip { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity;
+  scroll-padding-inline: 16px; scrollbar-width: thin; scrollbar-color: #4a4843 transparent; }
+.strip:focus-visible { outline-offset: -2px; }
+.strip.dragging { scroll-snap-type: none; cursor: grabbing; }
+.track {
+  --fh: 150px; --mm: calc(var(--fh) / 24); --edge: calc(var(--mm) * 5.5); --band: calc(var(--fh) + 2 * var(--edge));
+  display: flex; width: max-content; margin: 0; padding: 0 calc(var(--mm) * 6); list-style: none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4.75 5.5'%3E%3Crect x='1.385' y='1.353' width='1.98' height='2.794' rx='.45' fill='%231e1d1b'/%3E%3C/svg%3E") 0 0 / calc(var(--mm) * 4.75) var(--edge) repeat-x,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4.75 5.5'%3E%3Crect x='1.385' y='1.353' width='1.98' height='2.794' rx='.45' fill='%231e1d1b'/%3E%3C/svg%3E") 0 calc(var(--band) - var(--edge)) / calc(var(--mm) * 4.75) var(--edge) repeat-x,
+    linear-gradient(#0c0b0a, #0c0b0a) 0 0 / 100% var(--band) no-repeat;
+}
+.frame { flex: none; display: flex; flex-direction: column; margin-right: calc(var(--mm) * 2); scroll-snap-align: start; }
+.shot { display: block; height: var(--fh); aspect-ratio: 4 / 3; margin: var(--edge) 0; padding: 0; border: 0;
+  border-radius: 2px; overflow: hidden; background: #191816; }
+.tall .shot { aspect-ratio: 3 / 4; }
+.shot img { display: block; width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; user-select: none; }
+.lost .shot img { visibility: hidden; }
+.shot:hover img { filter: brightness(1.08); }
+.frame p { width: 0; min-width: 100%; margin: 9px 0 0; font-size: 15px; line-height: 1.35; }
+.frame .n { margin-right: .3em; }
+.tail { flex: none; display: flex; align-items: center; height: var(--band); padding: 0 22px 0 10px; font-size: 16px; }
+.log .fallback { max-width: 34em; margin: 0 auto; padding: 0 var(--side); }
+
+/* ---- The console: a radio with no brand on it, and the ignition. ---- */
+.console { display: grid; justify-items: center; gap: 30px; padding: 48px var(--side) 64px; }
+.radio {
+  width: min(100%, 500px); padding: 12px 12px 13px; border-radius: 8px;
+  background: linear-gradient(#262624, #121211);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 0 0 1px #000, 0 12px 26px rgba(0,0,0,.45);
+}
+.door { height: 13px; margin: 2px 56px 12px; border-radius: 2px; background: #060606;
+  box-shadow: inset 0 2px 3px #000, 0 1px 0 rgba(255,255,255,.07); }
+.face-row { display: flex; align-items: center; gap: 10px; }
+.knob {
+  position: relative; flex: none; width: 46px; height: 46px; padding: 0; border: 0; border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #4a4a47, #222220 58%, transparent 60%),
+    repeating-conic-gradient(#303030 0 6deg, #151515 6deg 12deg);
+  box-shadow: 0 0 0 1px #000, 0 2px 4px rgba(0,0,0,.7);
+  transition: transform .25s;
+}
+.knob::after { content: ""; position: absolute; left: 50%; top: 7px; width: 2px; height: 8px; margin-left: -1px;
+  border-radius: 1px; background: #d8d3c8; }
+.knob.power[aria-pressed="true"] { transform: rotate(35deg); }
+.display {
+  flex: 1; min-width: 0; height: 46px; display: flex; align-items: center; gap: 10px; padding: 0 10px;
+  border-radius: 3px; background: #150d04; box-shadow: inset 0 2px 7px #000;
+  color: var(--amber); font: 500 14px/1 var(--mono); text-shadow: 0 0 6px rgba(255,160,40,.55);
+}
+.display .ch { flex: none; opacity: .85; }
+.display .title { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-transform: uppercase; }
+.display .title span { display: inline-block; }
+.display .title.long span { animation: marquee var(--t, 8s) ease-in-out infinite alternate; }
+@keyframes marquee { 0%, 12% { transform: translateX(0); } 88%, 100% { transform: translateX(var(--shift)); } }
+.display .time { flex: none; margin-left: auto; }
+.radio:not(.on) .ch, .radio:not(.on) .title { display: none; }
+.keys { display: flex; gap: 6px; margin-top: 10px; }
+.keys button {
+  flex: 1; height: 34px; padding: 0; border: 0; border-radius: 3px; color: #cfcac0;
+  font: 700 13px/1 var(--sans); background: linear-gradient(#303030, #1b1b1a);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 2px #000;
+}
+.keys button[aria-pressed="true"] { color: var(--amber); box-shadow: inset 0 2px 4px #000; }
+.keys .seek { flex: 1.25; }
+
+.ignition { display: grid; justify-items: center; gap: 6px; padding: 0; border: 0; background: none;
+  color: var(--quiet); font: 15px/1 var(--serif); }
+.ignition svg { width: 104px; height: 104px; }
+.ignition text { fill: #8f8b83; font: 700 9px var(--sans); text-anchor: middle; dominant-baseline: central; }
+.key { transform: rotate(60deg); transform-origin: 60px 60px; transition: transform .45s cubic-bezier(.45,-.35,.35,1.4); }
+.ignition:hover .key { transform: rotate(52deg); }
+.ignition.off .key { transform: rotate(0deg); }
+
+/* Smudge, who comes up with the hazards. */
+.smudge {
+  position: fixed; left: 50%; bottom: 14px; z-index: 5; width: min(56vw, 230px); margin: 0; padding: 8px 8px 0;
+  background: #f4f1ea; color: #1e1d1b; border-radius: 2px; box-shadow: 0 10px 40px rgba(0,0,0,.7);
+  transform: translate(-50%, calc(100% + 30px)) rotate(-3deg); transition: transform .55s cubic-bezier(.3,1.5,.55,1);
+  cursor: pointer;
+}
+.smudge.up { transform: translate(-50%, 0) rotate(-3deg); }
+.smudge img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; background: #d8d4ca; }
+.smudge figcaption { padding: 6px 2px 9px; text-align: center; font: italic 15px/1.3 var(--serif); }
+
+/* A photo, big. */
+.viewer { width: 100%; max-width: 100vw; height: 100%; max-height: 100vh; margin: 0; padding: 0; border: 0;
+  background: transparent; color: var(--paper); }
+.viewer::backdrop { background: rgba(6,6,5,.93); }
+.viewer .pane { display: grid; place-items: center; align-content: center; gap: 12px; min-height: 100%; padding: 60px 12px 28px; }
+.viewer img { display: block; max-width: 100%; max-height: calc(100vh - 150px); border-radius: 2px; }
+.viewer p { margin: 0; max-width: 34em; text-align: center; font-size: 16px; }
+.viewer button { position: absolute; width: 48px; height: 48px; border: 0; border-radius: 50%;
+  background: rgba(255,255,255,.07); font: 26px/1 var(--sans); }
+.viewer .close { top: 10px; right: 10px; }
+.viewer .prev { left: 10px; top: 50%; margin-top: -24px; }
+.viewer .next { right: 10px; top: 50%; margin-top: -24px; }
+
+/* Key off: the lights go, then the screen. */
+body.dark::after { content: ""; position: fixed; inset: 0; z-index: 20; background: #000; animation: fade .6s forwards; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---- The film leader. SMPTE Universal: a sweep a second at 24 frames,
+   the 2 for one frame, black, the cue dots, and the cut. ---- */
+.leader { position: fixed; inset: 0; z-index: 30; overflow: hidden; background: #000; cursor: pointer;
+  animation: gone 0s 6.5s forwards; }
+@keyframes gone { to { visibility: hidden; } }
+.leader .gate { position: absolute; inset: 0; background: #8b8984; }
+.leader .sweep { position: absolute; inset: -50%; background: conic-gradient(#5d5b57 var(--a, 0deg), transparent 0); }
+.leader .v, .leader .h { position: absolute; background: #171716; }
+.leader .v { left: 50%; top: 0; bottom: 0; width: 2px; margin-left: -1px; }
+.leader .h { top: 50%; left: 0; right: 0; height: 2px; margin-top: -1px; }
+.leader svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.leader circle { fill: none; stroke: #f2efe7; stroke-width: .9; }
+.leader .num { position: absolute; inset: 0; display: grid; place-items: center; color: #121211;
+  font: 700 44vmin/1 var(--sans); }
+.leader.black .gate { background: #050505; }
+.leader.black .sweep, .leader.black .v, .leader.black .h, .leader.black svg { display: none; }
+.leader .cue { position: absolute; top: 7%; right: 8%; width: 6.5vmin; height: 6.5vmin; display: none;
+  border-radius: 47% 53% 50% 50%; background: radial-gradient(circle, #fbf8f1 56%, #cfcabe 66%, rgba(0,0,0,.65) 70%, transparent 74%); }
+.leader.cue-on .cue { display: block; }
+.leader .scratch { position: absolute; top: 0; bottom: 0; width: 1px; display: none; background: rgba(255,255,255,.55); }
+.leader .grain { position: absolute; inset: -40px; pointer-events: none; opacity: .24;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 220px 220px; }
+.leader::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 52%, rgba(0,0,0,.6)); }
+
+/* ---- Wider screens: the cluster in one row, like the real binnacle. ---- */
+@media (min-width: 52em) {
+  .wood { min-height: 92px; padding-inline: max(7vw, 32px); }
+  .plaque { margin-left: 18%; }
+  .hazard { margin-right: 14%; }
+  .cluster { max-width: 900px; margin: 0 auto; padding: 30px 40px 26px; display: grid;
+    grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0 28px; }
+  .row { display: contents; }
+  .row .gauge { width: auto; max-width: none; }
+  .speedo { grid-column: 2; grid-row: 1 / span 2; width: 300px; }
+  .tach { grid-column: 1; grid-row: 1 / span 2; width: 170px; justify-self: end; }
+  .fuel, .temp { grid-column: 3; width: 128px; }
+  .fuel { grid-row: 1; align-self: end; }
+  .temp { grid-row: 2; align-self: start; margin-top: 8px; }
+  .note { grid-column: 1 / -1; }
+  .lede { max-width: 46em; display: grid; grid-template-columns: auto 1fr; grid-template-rows: 1fr auto;
+    column-gap: 34px; align-items: end; }
+  .sketch { grid-row: 1 / span 2; margin: 0; }
+  .lede h1 { align-self: end; }
+  .log header { max-width: 46em; }
+  .lede p { grid-column: 2; }
+  .track { --fh: 210px; }
+  .console { grid-template-columns: min(500px, 100%) auto; justify-content: center; align-items: center; gap: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+<main>
+<section class="dash" aria-label="Wilma's dashboard">
+<div class="wood">
+<div class="plaque" role="img" aria-label="Dash plaque: 240 Classic, Limited Edition, No. 80/1600"><b>240 CLASSIC</b>LIMITED EDITION<br>NO. 80/1600</div>
+<button class="hazard" type="button" aria-pressed="false" aria-label="Hazard lights"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3.5 25 23H3Z M14 10.2 19.3 19.4H8.7Z"/></svg></button>
+</div>
+<div class="cluster">
+<div class="gauge speedo" role="img" aria-label="Speedometer at 0, idling"><span class="blinker l"></span><span class="blinker r"></span><div class="counters"><span class="counter odo"></span><span class="counter trip"></span></div></div>
+<div class="row">
+<div class="gauge tach" role="img" aria-label="No tachometer, just an empty ring"><span class="notach">no tach</span></div>
+<div class="gauge fuel" role="img" aria-label="Fuel gauge, stuck on empty"></div>
+<div class="gauge temp" role="img" aria-label="Temperature gauge at normal"></div>
+</div>
+<p class="note">Fuel gauge dead. Running off the trip meter.</p>
+</div>
+</section>
+
+<header class="lede">
+<img class="sketch" src="../doodles/wilma-color.png" width="300" height="190" alt="Wilma, drawn by hand: a green 240 wagon with pale blue glass, yellow headlights and lacy wheels." onerror="this.remove()">
+<h1>Wilma</h1>
+<p>1993 Volvo 240 Classic wagon, dark green. A Florida car, here since September 1, 2026.</p>
+</header>
+
+<section class="log" aria-labelledby="log-title">
+<header><h2 id="log-title">Build log</h2> <span class="m">Newest first.</span></header>
+<div class="strip" tabindex="0" role="region" aria-label="Build log photos, newest first"><ol class="track"></ol></div>
+<noscript><p class="fallback">The whole build is <a href="https://turbobricks.com/index.php?threads/wilma-93-240-classic-wagon-80-of-1600.384568/">on Turbobricks</a>.</p></noscript>
+</section>
+
+<section class="console" aria-label="Console">
+<div class="radio" role="group" aria-label="Radio">
+<div class="door"></div>
+<div class="face-row">
+<button class="knob power" type="button" aria-pressed="false" aria-label="Radio power"></button>
+<div class="display" aria-live="polite"><span class="ch"></span><span class="title"><span></span></span><span class="time"></span></div>
+<button class="knob tune" type="button" aria-label="Next preset"></button>
+</div>
+<div class="keys">
+<button class="seek back" type="button" aria-label="Back 30 seconds">◀◀</button>
+<span hidden class="presets"></span>
+<button class="seek fwd" type="button" aria-label="Forward 30 seconds">▶▶</button>
+</div>
+</div>
+<button class="ignition" type="button" aria-label="Key off, back to the site">
+<svg viewBox="0 0 120 120" aria-hidden="true">
+<defs><linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ebe9e3"/><stop offset=".5" stop-color="#8d8b85"/><stop offset="1" stop-color="#d9d7d0"/></linearGradient></defs>
+<circle cx="60" cy="60" r="57" fill="url(#chrome)"/>
+<circle cx="60" cy="60" r="50" fill="#0f0f0e"/>
+<text x="60" y="20">0</text><text x="80" y="25.4">I</text><text x="94.6" y="40">II</text><text x="100" y="60">III</text>
+<circle cx="60" cy="60" r="29" fill="#1b1b1a" stroke="#2e2e2c"/>
+<g class="key"><rect x="53.5" y="30" width="13" height="60" rx="4" fill="#262625" stroke="#474745"/><rect x="57.5" y="33" width="5" height="54" rx="2" fill="#3c3c3a"/></g>
+</svg>
+<span>Key off</span>
+</button>
+</section>
+</main>
+
+<figure class="smudge" hidden><img alt="" decoding="async"><figcaption></figcaption></figure>
+<p class="smudge-said" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
+
+<dialog class="viewer" aria-label="Photo">
+<div class="pane"><img alt=""><p></p></div>
+<button class="close" type="button" aria-label="Close">×</button>
+<button class="prev" type="button" aria-label="Newer photo">‹</button>
+<button class="next" type="button" aria-label="Older photo">›</button>
+</dialog>
+
+<script src="build-log.js"></script>
+<script>
+(() => {
+  "use strict";
+  const data = window.WILMA || {};
+  const root = document.documentElement;
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = (sel, el = document) => el.querySelector(sel);
+  const esc = text => String(text ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+  // ------------------------------------------------------------------
+  // Gauges. Angles run clockwise from 12 o'clock.
+  // ------------------------------------------------------------------
+  const at = (r, deg) => {
+    const a = (deg - 90) * Math.PI / 180;
+    return [(100 + r * Math.cos(a)).toFixed(2), (100 + r * Math.sin(a)).toFixed(2)];
+  };
+
+  function dial(el, o) {
+    const angle = v => o.start + (v - o.min) / (o.max - o.min) * o.sweep;
+    let s = '<svg viewBox="0 0 200 200" aria-hidden="true"><circle class="bezel" cx="100" cy="100" r="99"/>'
+      + '<circle class="rim" cx="100" cy="100" r="96.5"/><circle class="face" cx="100" cy="100" r="94"/>';
+    if (o.zone) {
+      const [x1, y1] = at(86, angle(o.zone[0])), [x2, y2] = at(86, angle(o.zone[1]));
+      s += `<path class="zone" d="M${x1} ${y1}A86 86 0 0 1 ${x2} ${y2}"/>`;
+    }
+    for (const [v, len, major] of o.ticks || []) {
+      const [x1, y1] = at(90, angle(v)), [x2, y2] = at(90 - len, angle(v));
+      s += `<line class="tick${major ? " major" : ""}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+    }
+    for (const [v, text] of o.labels || []) {
+      const [x, y] = at(o.labelR, angle(v));
+      s += `<text class="num" x="${x}" y="${y}">${text}</text>`;
+    }
+    if (o.caption) s += `<text class="cap" x="100" y="${o.captionY}">${o.caption}</text>`;
+    if (o.needle) {
+      const tip = 100 - o.needle;
+      s += `<g class="needle"><path d="M97.5 114 99.3 ${tip}h1.4l1.8 ${114 - tip}z"/></g>`
+        + '<circle class="hub" cx="100" cy="100" r="10"/>';
+    }
+    el.insertAdjacentHTML("afterbegin", s + "</svg>");
+    const needle = $(".needle", el);
+    return needle && {
+      set(v) { needle.style.setProperty("--r", angle(v) + "deg"); },
+      idle(on) { needle.classList.toggle("idle", on && !calm); },
+    };
+  }
+
+  const mph = [];
+  for (let v = 0; v <= 120; v += 5) mph.push([v, v % 20 ? (v % 10 ? 5 : 8) : 11, v % 20 === 0]);
+  const speedo = dial($(".speedo"), {
+    start: -135, sweep: 270, min: 0, max: 120, ticks: mph, labelR: 63,
+    labels: [0, 20, 40, 60, 80, 100, 120].map(v => [v, v]), caption: "MPH", captionY: 60, needle: 84,
+  });
+  const small = { start: -60, sweep: 120, min: 0, max: 1, labelR: 64, captionY: 136, needle: 76,
+    ticks: [[0, 12, true], [.25, 7], [.5, 12, true], [.75, 7], [1, 12, true]] };
+  const fuel = dial($(".fuel"), { ...small, labels: [[0, "E"], [.5, "½"], [1, "F"]], zone: [0, .13], caption: "FUEL" });
+  const temp = dial($(".temp"), { ...small, labels: [[0, "C"], [1, "H"]], zone: [.84, 1], caption: "TEMP" });
+  dial($(".tach"), {});
+
+  // Where the needles rest with the key out: speedo on its peg, temp cold,
+  // fuel pinned under E (and there it stays; the sender is dead).
+  const rest = () => { speedo.set(-3); temp.set(0); speedo.idle(false); };
+  fuel.set(-.06);
+  rest();
+
+  // ------------------------------------------------------------------
+  // Odometer and trip meter: drums, the last one white for tenths.
+  // ------------------------------------------------------------------
+  function counter(el, digits, tenths, label) {
+    const drums = digits + 1;
+    el.innerHTML = (label ? `<small>${label}</small>` : "") + Array.from({ length: drums }, (_, i) =>
+      `<span class="drum${i === digits ? " tenth" : ""}"><span class="reel">`
+      + "01234567890".split("").map(d => `<i>${d}</i>`).join("") + "</span></span>").join("");
+    const reels = [...el.querySelectorAll(".reel")];
+    let value = tenths;
+    const draw = (next, roll) => {
+      const now = String(next).padStart(drums, "0").slice(-drums);
+      const was = String(value).padStart(drums, "0").slice(-drums);
+      reels.forEach((reel, i) => {
+        if (roll && now[i] === "0" && was[i] === "9") {
+          // Roll on to the spare 0 at the bottom of the drum, then jump back to the top.
+          reel.style.setProperty("--d", 10);
+          reel.addEventListener("transitionend", () => {
+            reel.style.transition = "none";
+            reel.style.setProperty("--d", 0);
+            reel.offsetHeight;
+            reel.style.transition = "";
+          }, { once: true });
+        } else {
+          reel.style.setProperty("--d", now[i]);
+        }
+      });
+      value = next;
+    };
+    draw(tenths, false);
+    return { tick: () => draw(value + 1, !calm) };
+  }
+
+  const miles = Math.max(0, Math.round(Number(data.odometer) || 0));
+  const odo = counter($(".odo"), 6, miles * 10);
+  const trip = counter($(".trip"), 3, 0, "TRIP");
+  $(".odo").setAttribute("aria-label", `Odometer: ${miles.toLocaleString("en-US")} miles`);
+  let rolling = 0;
+  const drive = on => {
+    clearInterval(rolling);
+    if (on) rolling = setInterval(() => { odo.tick(); trip.tick(); }, 7000);
+  };
+
+  // ------------------------------------------------------------------
+  // Key on: the lights come up, the speedo settles at idle, temp warms.
+  // ------------------------------------------------------------------
+  const cluster = $(".cluster");
+  function keyOn() {
+    root.classList.remove("intro");
+    cluster.classList.add("on");
+    setTimeout(() => {
+      speedo.set(0);
+      temp.set(.47);
+      setTimeout(() => speedo.idle(true), 1400);
+    }, calm ? 0 : 200);
+    drive(true);
+  }
+
+  // ------------------------------------------------------------------
+  // The build log.
+  // ------------------------------------------------------------------
+  const log = Array.isArray(data.log) ? data.log.filter(item => item && item.photo) : [];
+  const track = $(".track");
+  const strip = $(".strip");
+
+  // Imgur's size letter: "h" is 1024px, "l" is 640px. Ids are 5 or 7 characters.
+  const thumbOf = item => {
+    if (item.thumb) return item.thumb;
+    const m = /^(https:\/\/i\.imgur\.com\/(?:[A-Za-z0-9]{7}|[A-Za-z0-9]{5}))h(\.[a-z]+)$/.exec(item.photo);
+    return m ? m[1] + "l" + m[2] : item.photo;
+  };
+
+  if (log.length) {
+    log.forEach((item, i) => {
+      const li = document.createElement("li");
+      li.className = "frame" + (item.tall ? " tall" : "");
+      const shot = document.createElement("button");
+      shot.type = "button";
+      shot.className = "shot";
+      const img = document.createElement("img");
+      img.loading = i < 3 ? "eager" : "lazy";
+      img.decoding = "async";
+      img.draggable = false;
+      img.alt = item.alt || item.caption || "Wilma";
+      img.addEventListener("load", () => { shot.style.aspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`; });
+      img.addEventListener("error", () => li.classList.add("lost"));
+      img.src = thumbOf(item);
+      shot.append(img);
+      shot.addEventListener("click", () => open(i));
+      const cap = document.createElement("p");
+      cap.innerHTML = `<span class="n m">${log.length - i}</span>${esc(item.caption)}`;
+      li.append(shot, cap);
+      track.append(li);
+    });
+  }
+  if (data.thread) {
+    const tail = document.createElement("li");
+    tail.className = "tail";
+    tail.innerHTML = `<a href="${esc(data.thread)}">The whole build is on Turbobricks&nbsp;→</a>`;
+    track.append(tail);
+  }
+  if (!log.length && !data.thread) {
+    strip.insertAdjacentHTML("afterend", '<p class="fallback">The build log didn’t load. The whole build is '
+      + '<a href="https://turbobricks.com/index.php?threads/wilma-93-240-classic-wagon-80-of-1600.384568/">on Turbobricks</a>.</p>');
+    strip.hidden = true;
+  }
+
+  // With a mouse, pull the film through by dragging. Touch and trackpads scroll natively.
+  let pull = null;
+  strip.addEventListener("pointerdown", e => {
+    if (e.pointerType === "mouse" && e.button === 0) pull = { x: e.clientX, left: strip.scrollLeft, moved: false };
+  });
+  addEventListener("pointermove", e => {
+    if (!pull) return;
+    const dx = e.clientX - pull.x;
+    if (!pull.moved && Math.abs(dx) > 5) { pull.moved = true; strip.classList.add("dragging"); }
+    if (pull.moved) strip.scrollLeft = pull.left - dx;
+  });
+  addEventListener("pointerup", () => {
+    if (pull && pull.moved) {
+      // The drag shouldn't also open the frame it ended on.
+      const swallow = e => { e.stopPropagation(); e.preventDefault(); };
+      strip.addEventListener("click", swallow, { capture: true, once: true });
+      setTimeout(() => strip.removeEventListener("click", swallow, true), 0);
+    }
+    pull = null;
+    strip.classList.remove("dragging");
+  });
+
+  // Tap a frame: the big print, with newer and older either side.
+  const viewer = $(".viewer");
+  const big = $(".viewer img");
+  const said = $(".viewer p");
+  let shown = 0;
+  function open(i) {
+    shown = (i + log.length) % log.length;
+    const item = log[shown];
+    big.src = thumbOf(item);
+    big.alt = item.alt || item.caption || "Wilma";
+    said.textContent = item.caption || "";
+    const full = new Image();
+    full.onload = () => { if (log[shown] === item) big.src = item.photo; };
+    full.src = item.photo;
+    if (!viewer.open) viewer.showModal();
+  }
+  $(".close", viewer).addEventListener("click", () => viewer.close());
+  $(".prev", viewer).addEventListener("click", () => open(shown - 1));
+  $(".next", viewer).addEventListener("click", () => open(shown + 1));
+  viewer.addEventListener("click", e => { if (e.target === viewer || e.target.classList.contains("pane")) viewer.close(); });
+  viewer.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft") open(shown - 1);
+    if (e.key === "ArrowRight") open(shown + 1);
+  });
+
+  // ------------------------------------------------------------------
+  // The radio. Presets are Matthew's mixes, streamed from the same files
+  // as the mix pages. Nothing plays until someone presses a button.
+  // ------------------------------------------------------------------
+  const presets = Array.isArray(data.radio) ? data.radio.filter(p => p && p.src) : [];
+  const radio = $(".radio");
+  const audio = new Audio();
+  audio.preload = "none";
+  let preset = 0;
+  let status = "";
+  const ch = $(".display .ch"), title = $(".display .title"), titleText = $(".display .title span"), time = $(".display .time");
+  const presetKeys = presets.slice(0, 6).map((p, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = i + 1;
+    b.setAttribute("aria-label", `Preset ${i + 1}: ${p.title}`);
+    b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", () => tune(i, true));
+    return b;
+  });
+  $(".presets").replaceWith(...presetKeys);
+
+  const clock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  const wallClock = () => { const d = new Date(); return `${d.getHours() % 12 || 12}:${String(d.getMinutes()).padStart(2, "0")}`; };
+  function paint() {
+    const on = !audio.paused || status === "TUNING";
+    radio.classList.toggle("on", on);
+    $(".power").setAttribute("aria-pressed", on);
+    presetKeys.forEach((b, i) => b.setAttribute("aria-pressed", on && i === preset));
+    if (!on) { time.textContent = status || wallClock(); return; }
+    ch.textContent = `P${preset + 1}`;
+    const name = status || presets[preset].title;
+    if (titleText.textContent !== name) {
+      titleText.textContent = name;
+      title.classList.remove("long");
+      const over = titleText.scrollWidth - title.clientWidth;
+      if (over > 0 && !calm) {
+        title.style.setProperty("--shift", `-${over + 8}px`);
+        title.style.setProperty("--t", `${Math.max(4, over / 18)}s`);
+        title.classList.add("long");
+      }
+    }
+    time.textContent = clock(audio.currentTime || 0);
+  }
+  function tune(i, play) {
+    if (!presets.length) return;
+    preset = (i + presets.length) % presets.length;
+    status = "";
+    audio.src = presets[preset].src;
+    titleText.textContent = "";
+    if ("mediaSession" in navigator && "MediaMetadata" in window) {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: presets[preset].title, artist: "Matthew Reate", album: "Wilma’s radio" });
+    }
+    if (play) power(true); else paint();
+  }
+  function power(on) {
+    if (!presets.length) return;
+    if (on) {
+      if (!audio.src) return tune(preset, true);
+      status = "TUNING";
+      paint();
+      audio.play().catch(() => { status = ""; paint(); });
+    } else {
+      status = "";
+      audio.pause();
+    }
+    paint();
+  }
+  audio.addEventListener("playing", () => { status = ""; paint(); });
+  audio.addEventListener("pause", paint);
+  audio.addEventListener("timeupdate", () => { time.textContent = clock(audio.currentTime); });
+  audio.addEventListener("ended", () => tune(preset + 1, true));
+  audio.addEventListener("error", () => { if (audio.src) { status = "NO SIGNAL"; paint(); } });
+  $(".power").addEventListener("click", () => power(audio.paused && status !== "TUNING"));
+  $(".tune").addEventListener("click", e => {
+    e.currentTarget.style.transform = `rotate(${(parseFloat(e.currentTarget.dataset.turn) || 0) + 30}deg)`;
+    e.currentTarget.dataset.turn = (parseFloat(e.currentTarget.dataset.turn) || 0) + 30;
+    tune(preset + 1, !audio.paused || status === "TUNING");
+  });
+  $(".seek.back").addEventListener("click", () => { if (audio.src) audio.currentTime = Math.max(0, audio.currentTime - 30); });
+  $(".seek.fwd").addEventListener("click", () => { if (audio.src) audio.currentTime = Math.min(audio.duration || Infinity, audio.currentTime + 30); });
+  if ("mediaSession" in navigator) {
+    try {
+      navigator.mediaSession.setActionHandler("play", () => power(true));
+      navigator.mediaSession.setActionHandler("pause", () => power(false));
+      navigator.mediaSession.setActionHandler("nexttrack", () => tune(preset + 1, true));
+      navigator.mediaSession.setActionHandler("previoustrack", () => tune(preset - 1, true));
+    } catch {}
+  }
+  paint();
+  setInterval(() => { if (audio.paused) paint(); }, 15000);
+
+  // ------------------------------------------------------------------
+  // Hazards: both signals blink, the relay ticks, and Smudge comes up.
+  // ------------------------------------------------------------------
+  const hazard = $(".hazard");
+  const smudge = $(".smudge");
+  const smudgeSaid = $(".smudge-said");
+  const pup = data.smudge || {};
+  let flashing = 0, relay = null, click = null;
+  const loadPup = () => {
+    const img = $("img", smudge);
+    if (!img.src && pup.photo) {
+      img.src = thumbOf(pup);
+      img.alt = pup.alt || "Smudge";
+      $("figcaption", smudge).textContent = pup.caption || "";
+    }
+  };
+  hazard.addEventListener("pointerenter", loadPup);
+  hazard.addEventListener("focus", loadPup);
+
+  function tick(high) {
+    try {
+      relay = relay || new (window.AudioContext || window.webkitAudioContext)();
+      if (!click) {
+        const n = Math.ceil(relay.sampleRate * .014);
+        click = relay.createBuffer(1, n, relay.sampleRate);
+        const d = click.getChannelData(0);
+        for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n) ** 3;
+      }
+      const src = relay.createBufferSource();
+      src.buffer = click;
+      const band = relay.createBiquadFilter();
+      band.type = "bandpass";
+      band.frequency.value = high ? 2600 : 1800;
+      band.Q.value = 1.8;
+      const gain = relay.createGain();
+      gain.gain.value = .22;
+      src.connect(band).connect(gain).connect(relay.destination);
+      src.start();
+    } catch {}
+  }
+
+  function hazards(on) {
+    hazard.setAttribute("aria-pressed", on);
+    clearInterval(flashing);
+    document.body.classList.toggle("blink", on && calm);
+    if (on) {
+      if (!calm) {
+        let lit = false;
+        const flash = () => { lit = !lit; document.body.classList.toggle("blink", lit); tick(lit); };
+        flash();
+        flashing = setInterval(flash, 370);
+      }
+      loadPup();
+      smudge.hidden = false;
+      smudge.offsetHeight;
+      smudge.classList.add("up");
+      smudgeSaid.textContent = pup.caption || "Smudge rides along.";
+    } else {
+      document.body.classList.remove("blink");
+      smudge.classList.remove("up");
+      smudgeSaid.textContent = "";
+      setTimeout(() => { if (!smudge.classList.contains("up")) smudge.hidden = true; }, calm ? 0 : 560);
+    }
+  }
+  hazard.addEventListener("click", () => hazards(hazard.getAttribute("aria-pressed") !== "true"));
+  smudge.addEventListener("click", () => hazards(false));
+
+  // ------------------------------------------------------------------
+  // Key off: the needles drop, the dash goes dark, and you're back where
+  // you came from (or the front page, if you came straight here).
+  // ------------------------------------------------------------------
+  const ignition = $(".ignition");
+  const home = location.protocol === "file:" ? "../index.html" : "../";
+  let leaving = false;
+  const cameFromSite = (() => {
+    try {
+      const ref = new URL(document.referrer);
+      return ref.origin === location.origin && !ref.pathname.startsWith("/wilma");
+    } catch { return false; }
+  })();
+  ignition.addEventListener("click", () => {
+    if (leaving) return;
+    leaving = true;
+    ignition.classList.add("off");
+    hazards(false);
+    power(false);
+    drive(false);
+    rest();
+    cluster.classList.remove("on");
+    const go = () => {
+      if (cameFromSite && history.length > 1) {
+        history.back();
+        setTimeout(() => { location.href = home; }, 700);
+      } else {
+        location.href = home;
+      }
+    };
+    if (calm) return go();
+    setTimeout(() => document.body.classList.add("dark"), 500);
+    setTimeout(go, 1150);
+  });
+  // Coming back with the Back button restores the page as it was left: key off, lights out.
+  addEventListener("pageshow", e => {
+    if (!e.persisted) return;
+    leaving = false;
+    ignition.classList.remove("off");
+    document.body.classList.remove("dark");
+    keyOn();
+  });
+
+  // ------------------------------------------------------------------
+  // The leader. 24 frames a second: 4 and 3 with the sweep, the 2 for a
+  // single frame, then black with the cue dots top right, then the cut.
+  // Any click or key skips it.
+  // ------------------------------------------------------------------
+  function leader(done) {
+    const el = document.createElement("div");
+    el.className = "leader";
+    el.setAttribute("aria-hidden", "true");
+    el.innerHTML = '<div class="gate"><div class="sweep"></div><div class="v"></div><div class="h"></div>'
+      + '<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"><circle cx="50" cy="50" r="41"/><circle cx="50" cy="50" r="33"/></svg>'
+      + '<b class="num"></b><i class="cue"></i><i class="scratch"></i></div><div class="grain"></div>';
+    document.body.append(el);
+    const gate = $(".gate", el), sweep = $(".sweep", el), num = $(".num", el), scratch = $(".scratch", el), grain = $(".grain", el);
+    const rand = n => Math.floor(Math.random() * n);
+    const start = performance.now();
+    let last = -1, over = false;
+    const skip = e => {
+      if (e.type === "pointerdown") {
+        // The click that skips shouldn't land on the dash underneath.
+        const swallow = ev => { ev.stopPropagation(); ev.preventDefault(); };
+        addEventListener("click", swallow, { capture: true, once: true });
+        setTimeout(() => removeEventListener("click", swallow, true), 600);
+      }
+      finish();
+    };
+    function finish() {
+      if (over) return;
+      over = true;
+      removeEventListener("keydown", skip, true);
+      removeEventListener("pointerdown", skip, true);
+      el.remove();
+      done();
+    }
+    addEventListener("keydown", skip, true);
+    addEventListener("pointerdown", skip, true);
+    // Backstop: a browser that pauses animation frames (a hidden tab, low power)
+    // still cuts to the dash on time.
+    setTimeout(finish, 68 * 1000 / 24 + 250);
+    (function frame(now) {
+      if (over) return;
+      const f = Math.floor((now - start) / (1000 / 24));
+      if (f !== last) {
+        last = f;
+        if (f >= 68) return finish();
+        el.classList.toggle("black", f > 48);
+        el.classList.toggle("cue-on", (f >= 52 && f < 56) || (f >= 60 && f < 64));
+        num.textContent = f < 24 ? "4" : f < 48 ? "3" : f === 48 ? "2" : "";
+        sweep.style.setProperty("--a", f < 48 ? `${(f % 24 + 1) * 15}deg` : "0deg");
+        // The film itself: grain, flicker, a little gate weave, the odd scratch.
+        grain.style.backgroundPosition = `${rand(220)}px ${rand(220)}px`;
+        gate.style.transform = `translate(${rand(3) - 1}px, ${rand(3) - 1}px)`;
+        gate.style.filter = `brightness(${(.92 + Math.random() * .12).toFixed(3)})`;
+        scratch.style.display = Math.random() < .14 ? "block" : "none";
+        scratch.style.left = `${rand(100)}%`;
+      }
+      requestAnimationFrame(frame);
+    })(start);
+  }
+
+  if (root.classList.contains("intro")) leader(keyOn);
+  else keyOn();
+})();
+</script>
+</body>
+</html>

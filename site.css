@@ -28,6 +28,20 @@ header { margin-bottom: 3em; }
 footer { margin-top: 5em; }
 footer p { margin: 0 0 .25em; }
 
+/* The footer's tiny wagon, the door to Wilma's page: his drawing of her, faint
+   and in her dark green at rest. Point at it and it comes up in his colors
+   (the same crossfade as the heading drawings, below). */
+a.wagon { margin-left: .4em; text-decoration: none; opacity: .55; transition: opacity .35s ease; }
+a.wagon .dd { vertical-align: -.12em; }
+a.wagon .dd > img { display: block; }
+a.wagon:hover, a.wagon:focus-visible { opacity: 1; }
+a.wagon:focus-visible .dd > img.color { opacity: 1; }
+a.wagon:focus-visible .dd > img:not(.color) { opacity: 0; }
+@media (hover: hover) {
+  a.wagon:hover .dd > img.color { opacity: 1; }
+  a.wagon:hover .dd > img:not(.color) { opacity: 0; }
+}
+
 /* Links keep the early-web underline, just quieter until you point at them. */
 a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: .15em;
   text-decoration-color: var(--rule); }
@@ -163,4 +177,13 @@ main:has(.photos) { max-width: 60em; }
 @media (max-width: 40em) {
   body { font-size: 17px; padding-top: 2em; }
   .rows li { column-gap: .8em; }
+}
+
+/* Phones: every mix on one line. The date steps out (each mix page still has
+   it), and the side margins tighten a little so the longest title fits on a
+   360px screen. */
+@media (max-width: 30em) {
+  body { padding-left: 1em; padding-right: 1em; }
+  .rows li { grid-template-columns: minmax(0, 1fr) auto; column-gap: .6em; }
+  .rows time { display: none; }
 }
