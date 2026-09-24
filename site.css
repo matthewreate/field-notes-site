@@ -99,18 +99,29 @@ h2 img.label { height: 1.9em; width: auto; vertical-align: -.5em; }  /* crate di
 h2 img.h, h2 .dd { vertical-align: baseline; margin: calc(1.3em - 3.3em * var(--s, 1)) 0 -.35em .45em; }
 h2 img.h { width: auto; height: calc(3.3em * var(--s, 1)); }
 /* A drawing with a colored-in twin: ink at rest, color when you point at its
-   section. Only where there's a pointer to point with; phones stay ink. */
-h2 .dd { display: inline-block; position: relative; }
-h2 .dd > img.h { display: block; margin: 0; }
-h2 .dd > img { transition: opacity .35s ease; }
-h2 .dd > img.color { position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+   section (on an inner page, at the drawing). Only where there's a pointer to
+   point with; phones stay ink. */
+.dd { display: inline-block; position: relative; }
+.dd > img.h { display: block; margin: 0; }
+.dd > img { transition: opacity .35s ease; }
+.dd > img.color { position: absolute; left: 0; top: 0; width: 100%; height: 100%;
   opacity: 0; }  /* exactly over the ink drawing; the two crossfade */
 @media (hover: hover) {
-  section:hover .dd > img.color { opacity: 1; }
-  section:hover .dd > img:not(.color) { opacity: 0; }
+  section:not(.page):hover .dd > img.color, .rail:hover .dd > img.color { opacity: 1; }
+  section:not(.page):hover .dd > img:not(.color), .rail:hover .dd > img:not(.color) { opacity: 0; }
 }
-@media (prefers-reduced-motion: reduce) { h2 .dd > img { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .dd > img { transition: none; } }
 h2:has(img.h) { margin-top: calc(1.5em + 2.1em * var(--s, 1)); }
+
+/* Inner pages sit in their crate: his divider for it (a link back to that crate
+   on the homepage) with the crate's drawing. On phones they share a row above
+   the title; on wide screens they move to the rail and stay while you scroll. */
+.page > .rail { display: flex; align-items: flex-end; column-gap: .55em; margin: 0 0 1.5em -.15em; }
+.page > .rail a { display: block; line-height: 0; }
+.page > .rail img.label { display: block; width: auto; }
+.page > .rail img.h { display: block; width: auto; height: calc(2.9em * var(--s, 1)); }
+.page > .rail .dd { display: block; }
+.page > .rail .mark { display: block; width: 9em; }
 
 /* Wide screens: section labels and drawings move to a left rail, like the
    credits on the back of a sleeve, and the page uses its width. */
@@ -128,6 +139,13 @@ h2:has(img.h) { margin-top: calc(1.5em + 2.1em * var(--s, 1)); }
   h2 .dd { width: fit-content; }  /* hug the drawing, not the whole rail */
   h2 img.label { display: block; vertical-align: 0; margin: -.2em 0 0 -.15em; }
   main > section > h2:has(img.h) { margin: 0; }  /* the narrow-screen headroom doesn't apply here */
+  main > section.page { margin-top: 0; }
+  .page > .rail { display: block; position: sticky; top: 2.5em; align-self: start; margin: 0 0 0 -.15em; }
+  .page > .rail img.h, .page > .rail .dd { margin-top: .7em; }
+  .page > .rail img.h { height: calc(3.8em * var(--s, 1)); }
+  .page > .rail .dd { width: fit-content; }
+  .page > .rail .dd > img.h { margin-top: 0; }
+  .page > .rail .mark { width: 100%; margin-top: .15em; }
   body:has(main > section) footer { margin-left: 11.5em; }
 }
 
