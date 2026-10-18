@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deep Cut Cocktail Hour | Matthew Reate</title>
+<meta name="description" content="A 54-minute cocktail-hour mix of deep cuts — Brazilian jazz, soul, boogie, and city pop — recorded live in one continuous pass.">
+<link rel="canonical" href="https://www.matthewreate.com/mixes/deep-cut-cocktail-hour.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Matthew Reate">
+<meta property="og:title" content="Deep Cut Cocktail Hour | Matthew Reate">
+<meta property="og:description" content="A 54-minute cocktail-hour mix of deep cuts — Brazilian jazz, soul, boogie, and city pop — recorded live in one continuous pass.">
+<meta property="og:url" content="https://www.matthewreate.com/mixes/deep-cut-cocktail-hour.html">
+<meta property="og:image" content="https://www.matthewreate.com/doodles/share.png?v=8b041c27">
+<link rel="stylesheet" href="../site.css?v=c8265d01">
+<script src="../wilma/key.js?v=5ca7ad73" defer></script>
+</head>
+<body>
+<header><a href="../">Matthew Reate</a></header>
+<main>
+<section class="page">
+<div class="rail"><a href="../#mixes"><img class="label" src="../doodles/divider-mixes.png?v=f4fa66a1" width="57" height="36" alt="Mixes" style="height: 2.30em"></a><img class="h" src="../doodles/headphones.png?v=4689d395" width="47" height="63" alt=""></div>
+<div>
+<h1>Deep Cut Cocktail Hour</h1>
+<p>A cocktail-hour set of deep cuts, recorded live in one pass.</p>
+<p class="m"><time datetime="2026-05">May 2026</time></p>
+<div class="player">
+<audio controls preload="none" src="https://pub-67f7093beab94c4c96e1858a443fbe71.r2.dev/mixes/Deep%20Cut%20Cocktail%20Hour.m4a"></audio>
+<button class="play" type="button" hidden aria-label="Play"><span class="i-play"><img class="btn" src="../doodles/play.png?v=8547c7b6" width="19" height="18" alt=""></span><span class="i-pause"><img class="btn" src="../doodles/pause.png?v=2b24e819" width="15" height="18" alt=""></span></button>
+<input class="seek" type="range" min="0" max="3264" step="1" value="0" aria-label="Seek" hidden>
+<span class="clock" hidden><span class="now">0:00</span> / 54:24</span>
+</div>
+<p>Cocktail hour is the room’s first hour — the stretch where the music quietly settles what kind of night it’s going to be, before anyone has been asked to do anything.</p>
+<p>Brazilian jazz, soul, and boogie, with a turn through bossa and city pop. Collector records, mostly — the kind that carry a room without leaning on anything the guests walked in already knowing.</p>
+<h2>Tracklist</h2>
+<p class="m">In mix order. BPM and key for the crate-diggers.</p>
+<ol class="t">
+<li>Jorge Autuori – Autorizando <span class="m">109 2A</span></li>
+<li>Thee Sacred Souls – Future Lover <span class="m">74 1A</span></li>
+<li>Syl Johnson – Soul Heaven <span class="m">135 1A</span></li>
+<li>Khruangbin – Time (You and I) <span class="m">105 1B</span></li>
+<li>Jorge Autuori – Autorizando <span class="m">109 2A</span></li>
+<li>strongboi – fool around <span class="m">111 2A</span></li>
+<li>Brick – Southern Sunset <span class="m">113 3B</span></li>
+<li>berlioz &amp; Ted Jasper – deep in it <span class="m">119 3B</span></li>
+<li>Aretha Franklin – Get It Right <span class="m">123 4A</span></li>
+<li>Leo’s Sunshipp – Give Me the Sunshine <span class="m">96 4A</span></li>
+<li>Herb Alpert – Rise <span class="m">99 4A</span></li>
+<li>Say She She – Forget Me Not <span class="m">101 5A</span></li>
+<li>George McCrae – You Can Have It All <span class="m">106 4A</span></li>
+<li>Oby Onyioha – Enjoy Your Life <span class="m">114 5A</span></li>
+<li>Azymuth – Jazz Carnival <span class="m">126 6A</span></li>
+<li>Elis Regina – Águas de Março <span class="m">72 6B</span></li>
+<li>Dorothy Ashby – Canto de Ossanha <span class="m">93 7A</span></li>
+<li>Miki Matsubara – Mayonaka no Door / Stay With Me <span class="m">108 7B</span></li>
+<li>El Guincho – Bombay <span class="m">107 9A</span></li>
+<li>Nel Oliver – I Have a Good Job <span class="m">106 9A</span></li>
+</ol>
+
+<script>
+(() => {
+  const audio = new Audio(); let row = null;
+  const clock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  const reset = li => { li.classList.remove("on"); li.querySelector(".clock").textContent = li.dataset.runtime; };
+  for (const li of document.querySelectorAll(".rows li[data-src]")) {
+    const button = li.querySelector(".play");
+    if (!button) continue;
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      if (row === li && !audio.paused) return audio.pause();
+      if (row !== li) { if (row) reset(row); row = li; audio.src = li.dataset.src; }
+      audio.play();
+    });
+  }
+  audio.addEventListener("play", () => row && row.classList.add("on"));
+  audio.addEventListener("pause", () => row && row.classList.remove("on"));
+  audio.addEventListener("timeupdate", () => row && (row.querySelector(".clock").textContent = clock(audio.currentTime)));
+  audio.addEventListener("ended", () => { if (row) reset(row); row = null; });
+  // A mix's own page: the drawn button, an ink line to drag, and a clock.
+  for (const p of document.querySelectorAll(".player")) {
+    const a = p.querySelector("audio"), button = p.querySelector(".play");
+    const seek = p.querySelector(".seek"), now = p.querySelector(".now");
+    a.removeAttribute("controls");
+    for (const el of p.querySelectorAll("[hidden]")) el.hidden = false;
+    const paint = () => {
+      const length = a.duration || +seek.max;
+      now.textContent = clock(a.currentTime);
+      seek.value = a.currentTime;
+      seek.setAttribute("aria-valuetext", now.textContent);
+      seek.style.setProperty("--p", `${length ? a.currentTime / length * 100 : 0}%`);
+    };
+    button.addEventListener("click", () => a.paused ? a.play() : a.pause());
+    seek.addEventListener("input", () => { a.currentTime = +seek.value; paint(); });
+    a.addEventListener("loadedmetadata", () => { seek.max = a.duration; paint(); });
+    a.addEventListener("timeupdate", paint);
+    a.addEventListener("play", () => { p.classList.add("on"); button.setAttribute("aria-label", "Pause"); });
+    a.addEventListener("pause", () => { p.classList.remove("on"); button.setAttribute("aria-label", "Play"); });
+  }
+})();
+</script>
+</div>
+</section>
+</main>
+<footer>
+<p>Booked exclusively through <a href="https://www.ntweddingdjs.com/matthew">Non-Traditional Wedding DJs</a>.</p>
+<p class="m"><a href="../about.html">About</a> · <a href="https://www.instagram.com/matthewreatedj/">Instagram</a> <a class="wagon" href="../wilma/" aria-label="Wilma"><span class="dd"><img class="wagon" src="../doodles/wagon.png?v=8b886443" width="22" height="14" alt=""><img class="wagon color" src="../doodles/wagon-color.png?v=23234682" width="22" height="14" alt=""></span></a></p>
+</footer>
+</body>
+</html>

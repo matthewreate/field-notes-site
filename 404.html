@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Not Found | Matthew Reate</title>
+<link rel="stylesheet" href="/site.css?v=c8265d01">
+<script src="/wilma/key.js?v=5ca7ad73" defer></script>
+</head>
+<body>
+<header><a href="/">Matthew Reate</a></header>
+<main>
+<img class="lost" src="/doodles/lost.png?v=02e59973" width="240" height="177" alt="">
+<h1>That page isn’t here.</h1>
+<p>Try <a href="/">the front page</a>.</p>
+</main>
+<!--
+  The gig logs under /issues/ and the essays under /notes/ were retired in
+  September 2026, and the older issue URLs (retired in August 2026) contained
+  couple first names. Instagram and search still link to all of them, so those
+  paths go to the front page instead of dead-ending here. GitHub Pages is
+  case-sensitive, so /Wilma and friends go to her page.
+-->
+<script>
+if (/^\/(issues|notes)\//.test(location.pathname)) location.replace("/");
+else if (/^\/wilma\b/i.test(location.pathname)) location.replace("/wilma/");
+</script>
+</body>
+</html>
