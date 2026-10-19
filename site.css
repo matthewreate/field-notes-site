@@ -122,8 +122,8 @@ ul.rows { list-style: none; padding: 0; }
 
 /* Matthew's drawings. Crude on purpose. */
 img { max-width: 100%; height: auto; }
-h1 img.name { display: block; width: 16em; margin: .2em 0 .3em -.4em; }
-header img.sig { display: block; width: 9em; margin-left: -.25em; }
+h1 img.name { display: block; width: 10em; margin: .2em 0 .3em -.4em; }
+header img.sig { display: block; width: 5em; margin-left: -.25em; }
 .lede .mark { display: block; width: 11em; margin: 1em 0 1.2em -.2em; }
 .motto { font-style: italic; margin: 0 0 .7em; }
 h2 img.label { height: 1.9em; width: auto; vertical-align: -.5em; }  /* crate dividers */
