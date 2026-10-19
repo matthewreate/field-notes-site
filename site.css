@@ -125,6 +125,9 @@ img { max-width: 100%; height: auto; }
 h1 img.name { display: block; width: 10em; margin: .2em 0 .3em -.4em; }
 header img.sig { display: block; width: 5em; margin-left: -.25em; }
 .lede .mark { display: block; width: 11em; margin: 1em 0 1.2em -.2em; }
+/* With its colored twin, the controller's size and place move to the pair. */
+.lede .dd { display: block; width: 11em; margin: 1em 0 1.2em -.2em; }
+.lede .dd > img.mark { display: block; width: 100%; margin: 0; }
 .motto { font-style: italic; margin: 0 0 .7em; }
 h2 img.label { height: 1.9em; width: auto; vertical-align: -.5em; }  /* crate dividers */
 .lost { display: block; width: 12em; margin: 0 0 1.5em -.2em; }
@@ -169,6 +172,7 @@ h2:has(img.h) { margin-top: calc(1.5em + 2.1em * var(--s, 1)); }
   main > section > :not(h2, .rail) { grid-column: 2; grid-row: 1; }
   main > section.lede { margin-top: 2em; }
   .lede .mark { width: 100%; margin: .15em 0 0 -.2em; }
+  .lede .dd { width: 100%; margin: .15em 0 0 -.2em; }
   h2 img.h, h2 .dd { display: block; margin: .7em 0 0 -.1em; }
   h2 img.h { height: calc(3.8em * var(--s, 1)); }
   h2 .dd > img.h { margin: 0; }
