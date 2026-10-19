@@ -68,6 +68,7 @@ details.listen summary { cursor: pointer; width: fit-content; text-decoration: u
 details.listen summary:hover { text-decoration-color: currentColor; }
 details.listen iframe { display: block; width: 100%; max-width: 30em; height: 152px; border: 0;
   border-radius: 12px; margin-top: .8em; }
+details.listen iframe.yt { height: auto; aspect-ratio: 16 / 9; border-radius: 4px; }
 
 /* Gray is data (dates, counts, BPM and key). Italic is a note in my voice. */
 .m { color: var(--quiet); }
