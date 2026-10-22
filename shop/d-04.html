@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Black Sabbath – Black Sabbath (1970 LP) | Matthew Reate</title>
+<meta name="description" content="Black Sabbath – Black Sabbath: LP, Warner Bros. WS 1871, 1970. Ungraded, checked before it ships. One copy, $55, on Discogs.">
+<link rel="canonical" href="https://www.matthewreate.com/shop/d-04.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Matthew Reate">
+<meta property="og:title" content="Black Sabbath – Black Sabbath (1970 LP) | Matthew Reate">
+<meta property="og:description" content="Black Sabbath – Black Sabbath: LP, Warner Bros. WS 1871, 1970. Ungraded, checked before it ships. One copy, $55, on Discogs.">
+<meta property="og:url" content="https://www.matthewreate.com/shop/d-04.html">
+<link rel="icon" type="image/png" href="../doodles/icon.png?v=b096170e">
+<link rel="apple-touch-icon" href="../doodles/apple-touch-icon.png?v=992a4455">
+<meta property="og:image" content="https://www.matthewreate.com/doodles/share.png?v=d0e94375">
+<link rel="stylesheet" href="../site.css?v=a74d4e97">
+<script src="../wilma/key.js?v=5ca7ad73" defer></script>
+</head>
+<body>
+<header><a href="../"><img class="sig" src="../doodles/name.png?v=15333e3e" width="95" height="101" alt="Matthew Reate"></a></header>
+<main>
+<section class="page">
+<div class="rail"><a href="../#shop">Shop</a><span class="dd"><img class="h" src="../doodles/record-sleeve.png?v=9889031b" width="72" height="63" alt=""><img class="h color" src="../doodles/record-sleeve-color.png?v=31f1ebb8" width="72" height="63" alt=""></span></div>
+<div>
+<svg class="disc" width="171" height="171" viewBox="0 0 120 120" role="img" style="display: block; margin: 0 0 1.1em -.1em" aria-label="Warner Bros., Black Sabbath, WS 1871, 1970"><circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="60" cy="60" r="2.5" fill="currentColor"/><path id="arc-d-04" d="M 19 60 A 41 41 0 0 1 101 60" fill="none"/><text font-size="10" fill="currentColor"><textPath href="#arc-d-04" startOffset="50%" text-anchor="middle">Warner Bros.</textPath></text><text x="60" y="80" font-size="10" fill="currentColor" text-anchor="middle">Black Sabbath</text><text x="60" y="92" font-size="8.5" style="fill: var(--quiet)" text-anchor="middle">WS 1871</text><text x="60" y="103" font-size="8.5" style="fill: var(--quiet)" text-anchor="middle">1970</text></svg>
+<h1>Black Sabbath – Black Sabbath</h1>
+<p><i>A previous owner’s name sticker on the cover.</i></p>
+<p class="m">LP · Warner Bros. WS 1871 · 1970<br>
+Ungraded, checked before it ships</p>
+<p class="m">Ninety seconds on it, in my voice:</p>
+<div class="player">
+<audio controls preload="none" src="https://pub-67f7093beab94c4c96e1858a443fbe71.r2.dev/liner/D-04.m4a"></audio>
+<button class="play" type="button" hidden aria-label="Play"><span class="i-play"><img class="btn" src="../doodles/play.png?v=8547c7b6" width="19" height="18" alt=""></span><span class="i-pause"><img class="btn" src="../doodles/pause.png?v=2b24e819" width="15" height="18" alt=""></span></button>
+<input class="seek" type="range" min="0" max="0" step="1" value="0" aria-label="Seek" hidden>
+<span class="clock" hidden><span class="now">0:00</span></span>
+</div>
+<p><a href="https://www.discogs.com/sell/item/4421832492">Buy on Discogs</a> <span class="m">$55</span></p>
+</div>
+</section>
+<script>
+(() => {
+  const audio = new Audio(); let row = null;
+  const clock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  const reset = li => { li.classList.remove("on"); li.querySelector(".clock").textContent = li.dataset.runtime; };
+  for (const li of document.querySelectorAll(".rows li[data-src]")) {
+    const button = li.querySelector(".play");
+    if (!button) continue;
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      if (row === li && !audio.paused) return audio.pause();
+      if (row !== li) { if (row) reset(row); row = li; audio.src = li.dataset.src; }
+      audio.play();
+    });
+  }
+  audio.addEventListener("play", () => row && row.classList.add("on"));
+  audio.addEventListener("pause", () => row && row.classList.remove("on"));
+  audio.addEventListener("timeupdate", () => row && (row.querySelector(".clock").textContent = clock(audio.currentTime)));
+  audio.addEventListener("ended", () => { if (row) reset(row); row = null; });
+  // A mix's own page: the drawn button, an ink line to drag, and a clock.
+  for (const p of document.querySelectorAll(".player")) {
+    const a = p.querySelector("audio"), button = p.querySelector(".play");
+    const seek = p.querySelector(".seek"), now = p.querySelector(".now");
+    a.removeAttribute("controls");
+    for (const el of p.querySelectorAll("[hidden]")) el.hidden = false;
+    const paint = () => {
+      const length = a.duration || +seek.max;
+      now.textContent = clock(a.currentTime);
+      seek.value = a.currentTime;
+      seek.setAttribute("aria-valuetext", now.textContent);
+      seek.style.setProperty("--p", `${length ? a.currentTime / length * 100 : 0}%`);
+    };
+    button.addEventListener("click", () => a.paused ? a.play() : a.pause());
+    seek.addEventListener("input", () => { a.currentTime = +seek.value; paint(); });
+    a.addEventListener("loadedmetadata", () => { seek.max = a.duration; paint(); });
+    a.addEventListener("timeupdate", paint);
+    a.addEventListener("play", () => { p.classList.add("on"); button.setAttribute("aria-label", "Pause"); });
+    a.addEventListener("pause", () => { p.classList.remove("on"); button.setAttribute("aria-label", "Play"); });
+  }
+})();
+</script>
+</main>
+<footer>
+<p>Weddings booked exclusively through <a href="https://www.ntweddingdjs.com/matthew">Non-Traditional Wedding DJs</a>.</p>
+<p class="m"><a href="../about.html">About</a> · <a href="https://www.instagram.com/matthewreatedj/">Instagram</a> <a class="wagon" href="../wilma/" aria-label="Wilma"><span class="dd"><img class="wagon" src="../doodles/wagon.png?v=8b886443" width="22" height="14" alt=""><img class="wagon color" src="../doodles/wagon-color.png?v=23234682" width="22" height="14" alt=""></span></a></p>
+</footer>
+</body>
+</html>
