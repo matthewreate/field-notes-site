@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Michael Jackson, Thriller (1982) · Liner notes | Matthew Reate</title>
+<meta name="description" content="Ninety seconds on Thriller, read by Matthew. A near-mint copy from the shop.">
+<link rel="canonical" href="https://www.matthewreate.com/shop/notes/H-10.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Matthew Reate">
+<meta property="og:title" content="Michael Jackson, Thriller (1982) · Liner notes | Matthew Reate">
+<meta property="og:description" content="Ninety seconds on Thriller, read by Matthew. A near-mint copy from the shop.">
+<meta property="og:url" content="https://www.matthewreate.com/shop/notes/H-10.html">
+<link rel="icon" type="image/png" href="../../doodles/icon.png?v=b096170e">
+<link rel="apple-touch-icon" href="../../doodles/apple-touch-icon.png?v=992a4455">
+<meta property="og:image" content="https://www.matthewreate.com/doodles/share.png?v=d0e94375">
+<link rel="stylesheet" href="../../site.css?v=a74d4e97">
+<script src="../../wilma/key.js?v=5ca7ad73" defer></script>
+</head>
+<body>
+<header><a href="../../"><img class="sig" src="../../doodles/name.png?v=15333e3e" width="95" height="101" alt="Matthew Reate"></a></header>
+<main>
+<section class="page">
+<div class="rail"><a href="../../#shop">Shop</a><span class="dd"><img class="h" src="../../doodles/record-sleeve.png?v=9889031b" width="72" height="63" alt=""><img class="h color" src="../../doodles/record-sleeve-color.png?v=31f1ebb8" width="72" height="63" alt=""></span></div>
+<div>
+<h1>Michael Jackson — <i>Thriller</i></h1>
+<p class="m">Epic, 1982 · near mint · <a href="index.html">liner notes</a></p>
+<div class="player">
+<audio controls preload="none" src="https://pub-67f7093beab94c4c96e1858a443fbe71.r2.dev/liner/H-10.m4a"></audio>
+<button class="play" type="button" hidden aria-label="Play"><span class="i-play"><img class="btn" src="../../doodles/play.png?v=8547c7b6" width="19" height="18" alt=""></span><span class="i-pause"><img class="btn" src="../../doodles/pause.png?v=2b24e819" width="15" height="18" alt=""></span></button>
+<input class="seek" type="range" min="0" max="0" step="1" value="0" aria-label="Seek" hidden>
+<span class="clock" hidden><span class="now">0:00</span></span>
+</div>
+<p>Everybody has a copy of <i>Thriller</i>. That’s the point. It’s the best-selling record ever made, so the question is never whether you want it, it’s which copy you want.</p>
+<p>This one is near mint. Which means it sat somewhere quiet, and the record still sounds the way Quincy Jones and Bruce Swedien meant it to. They were obsessive. Every sound on here was put exactly where it is.</p>
+<p>What to listen for, if you think you’ve heard it all: “Baby Be Mine”, track two. It never got a single, so nobody plays it, and it’s as good as anything on the record. And on “Beat It”, that’s Eddie Van Halen, who did the solo for free as a favor and didn’t tell his band.</p>
+<p>Seven singles off one album went top ten. Nobody has done that since.</p>
+
+<script>
+(() => {
+  const audio = new Audio(); let row = null;
+  const clock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  const reset = li => { li.classList.remove("on"); li.querySelector(".clock").textContent = li.dataset.runtime; };
+  for (const li of document.querySelectorAll(".rows li[data-src]")) {
+    const button = li.querySelector(".play");
+    if (!button) continue;
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      if (row === li && !audio.paused) return audio.pause();
+      if (row !== li) { if (row) reset(row); row = li; audio.src = li.dataset.src; }
+      audio.play();
+    });
+  }
+  audio.addEventListener("play", () => row && row.classList.add("on"));
+  audio.addEventListener("pause", () => row && row.classList.remove("on"));
+  audio.addEventListener("timeupdate", () => row && (row.querySelector(".clock").textContent = clock(audio.currentTime)));
+  audio.addEventListener("ended", () => { if (row) reset(row); row = null; });
+  // A mix's own page: the drawn button, an ink line to drag, and a clock.
+  for (const p of document.querySelectorAll(".player")) {
+    const a = p.querySelector("audio"), button = p.querySelector(".play");
+    const seek = p.querySelector(".seek"), now = p.querySelector(".now");
+    a.removeAttribute("controls");
+    for (const el of p.querySelectorAll("[hidden]")) el.hidden = false;
+    const paint = () => {
+      const length = a.duration || +seek.max;
+      now.textContent = clock(a.currentTime);
+      seek.value = a.currentTime;
+      seek.setAttribute("aria-valuetext", now.textContent);
+      seek.style.setProperty("--p", `${length ? a.currentTime / length * 100 : 0}%`);
+    };
+    button.addEventListener("click", () => a.paused ? a.play() : a.pause());
+    seek.addEventListener("input", () => { a.currentTime = +seek.value; paint(); });
+    a.addEventListener("loadedmetadata", () => { seek.max = a.duration; paint(); });
+    a.addEventListener("timeupdate", paint);
+    a.addEventListener("play", () => { p.classList.add("on"); button.setAttribute("aria-label", "Pause"); });
+    a.addEventListener("pause", () => { p.classList.remove("on"); button.setAttribute("aria-label", "Play"); });
+  }
+})();
+</script>
+</div>
+</section>
+</main>
+<footer>
+<p>Weddings booked exclusively through <a href="https://www.ntweddingdjs.com/matthew">Non-Traditional Wedding DJs</a>.</p>
+<p class="m"><a href="../../about.html">About</a> · <a href="https://www.instagram.com/matthewreatedj/">Instagram</a> <a class="wagon" href="../../wilma/" aria-label="Wilma"><span class="dd"><img class="wagon" src="../../doodles/wagon.png?v=8b886443" width="22" height="14" alt=""><img class="wagon color" src="../../doodles/wagon-color.png?v=23234682" width="22" height="14" alt=""></span></a></p>
+</footer>
+</body>
+</html>
