@@ -62,6 +62,35 @@ audio { display: block; width: 100%; margin: 1em 0; }
    which loads only when opened. */
 img.shirt-pic { display: block; width: 100%; max-width: 26em; height: auto; margin: 0 0 1.2em -.4em; }
 img.shirt-art { display: block; width: 100%; max-width: 18em; height: auto; }
+/* A record page as a record (scripts/shop_obi.py): the paper label in a jacket with an obi down the
+   spine, ink at rest and the programs' yellow when you point at it. Then liner notes like a gatefold. */
+.jacket { position: relative; width: 15em; height: 15em; margin: 0 0 1.4em; border: 1px solid var(--ink);
+  display: grid; place-items: center; }
+.jacket .disc { margin: 0 0 0 2.6em !important; }
+.obi { position: absolute; inset: -1px auto -1px -1px; width: 3.3em; padding: .7em 0;
+  background: var(--ink); color: var(--paper); display: flex; flex-direction: column; align-items: center;
+  justify-content: space-between; gap: .4em; text-align: center; overflow: hidden;
+  transition: background-color .35s ease, color .35s ease; }
+@media (hover: hover) { .jacket:hover .obi { background: #f3c93f; color: var(--ink); } }
+.obi .fine { font-size: .55em; letter-spacing: .08em; line-height: 1.25; font-variant-numeric: tabular-nums; }
+.obi .t { writing-mode: vertical-rl; line-height: 1.15; display: flex; flex-direction: column; gap: .2em;
+  max-height: 100%; min-height: 0; }
+.obi .t b { letter-spacing: .03em; }
+.liner-notes { margin: 2em 0 2.2em; padding-top: 1.4em; border-top: 1px solid var(--ink); }
+.liner-notes .sides { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em 1.6em; margin: 0 0 1.6em; }
+.liner-notes p + .sides { margin-top: 1.4em; }
+.liner-notes .sides h2 { font-style: italic; font-weight: normal; margin: 0 0 .25em; }
+.liner-notes .sides ol { list-style: none; padding: 0; margin: 0; }
+.liner-notes .sides li { display: flex; justify-content: space-between; gap: .6em; }
+.liner-notes .credits { text-align: center; font-size: .84em; margin-bottom: 1em; }
+.liner-notes .credits h3 { font-style: italic; font-weight: normal; margin: 1em 0 .1em;
+  display: flex; align-items: center; justify-content: center; gap: .6em; }
+.liner-notes .credits h3::before, .liner-notes .credits h3::after { content: ""; flex: 0 1 2.5em; min-width: .8em;
+  border-top: 1px solid var(--rule); }
+.liner-notes .credits p { margin: 0; }
+.liner-notes .credits .made { margin-top: 1.4em; }
+@media (max-width: 30em) { .liner-notes .sides { grid-template-columns: 1fr; } }
+
 details.listen { margin: 0 0 1.2em; }
 details.listen summary { cursor: pointer; width: fit-content; text-decoration: underline;
   text-decoration-thickness: 1px; text-underline-offset: .15em; text-decoration-color: var(--rule); }
