@@ -268,6 +268,77 @@ main:has(.photos) { max-width: 60em; }
   .pick p { margin: .7em 0 0; text-align: center; }
 }
 
+/* The floor page (floor/, 2026-11-10): his plays, counted. Plain ink marks; gray is data.
+   Figures are drawn 360 units wide so their type reads on a phone; on a wide
+   screen they stop at 25em so it stays near body size. */
+.fig { margin: 1.4em 0 2.6em; }
+.fig svg { display: block; width: 100%; max-width: 25em; height: auto; overflow: visible; }
+.fig svg text { font-size: 12.5px; fill: var(--quiet); font-variant-numeric: tabular-nums; }
+.fig figcaption { color: var(--quiet); margin-top: .7em; max-width: 25em; }
+.fig line, .fig path { vector-effect: non-scaling-stroke; }
+.fig .axis { stroke: var(--ink); stroke-width: 1; }
+.fig .ticks line { stroke: var(--ink); stroke-width: 1; }
+.fig .ticks text, .fig .bl { text-anchor: middle; }
+
+/* The record */
+.record svg { max-width: 15em; }
+.record .disc { fill: none; stroke: var(--ink); stroke-width: 1.2; }
+.record .grooves circle { fill: none; stroke: var(--rule); stroke-width: .45; }
+.record .seg { fill: none; stroke-width: 44; vector-effect: none; }
+.record .seg.off { stroke: var(--ink); }
+.record .seg.other { stroke: url(#hatch); }
+.record #hatch line { stroke: var(--ink); stroke-width: 1.15; vector-effect: none; }
+.record .label { fill: var(--paper); stroke: var(--ink); stroke-width: 1; }
+.record .hole { fill: var(--paper); stroke: var(--ink); stroke-width: .8; }
+.record svg text { text-anchor: middle; fill: var(--ink); }
+.record svg .l1 { font-size: 17px; }
+.record svg .l2 { font-size: 10px; letter-spacing: .08em; fill: var(--quiet); }
+.record figcaption { display: grid; gap: .3em; color: var(--ink); }
+.key { display: flex; gap: .6em; align-items: baseline; }
+.sw { flex: none; width: .85em; height: .85em; border: 1px solid var(--ink); transform: translateY(.08em); }
+.sw.off { background: var(--ink); }
+.sw.other { background: repeating-linear-gradient(-55deg, var(--ink) 0 1px, transparent 1px 3.5px); }
+
+/* One dot per wedding */
+.dots .ds circle { fill: var(--ink); }
+
+/* The crate */
+.crate .shape { fill: url(#spines); stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; }
+.crate #spines line { stroke: var(--ink); stroke-width: .7; }
+.crate .brace { fill: none; stroke: var(--quiet); stroke-width: 1; }
+
+/* Small records: inked in, or an empty ring */
+.discs svg { max-width: 25em; }
+.discs.tens svg { max-width: 15em; }
+.discs .on circle { fill: var(--ink); }
+.discs .on .h { fill: var(--paper); }
+.discs .no circle { fill: none; stroke: var(--ink); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.discs .no .h { fill: var(--ink); stroke: none; }
+
+/* The heel, kicked off at the end of the night */
+.shoe { display: block; width: 4.4em; margin: 2.6em 0 .6em; }
+.floor-notes { color: var(--quiet); }
+
+/* The disco ball in the rail: it swings a little as you scroll, and comes up
+   in his colors near the end of the page. */
+.anim .rail .dd { transform-origin: 50% 0; transform: rotate(var(--sway, 0deg)); }
+.anim .rail .dd > img.color { opacity: var(--lit, 0); transition: none; }
+.anim .rail .dd > img:not(.color) { opacity: calc(1 - var(--lit, 0)); transition: none; }
+
+/* Motion, only when floor.js has switched it on (.anim): things wait until
+   their figure comes into view (.on). */
+.anim .dots .ds circle { opacity: 0; transform: translateY(-46px); }
+.anim .dots.on .ds circle { opacity: 1; transform: none;
+  transition: transform .55s cubic-bezier(.3, 1.45, .55, 1) calc(var(--i) * 16ms),
+              opacity .15s linear calc(var(--i) * 16ms); }
+.anim .discs g { opacity: 0; transform-box: fill-box; transform-origin: center; }
+.anim .discs.on g { opacity: 1; transition: opacity .3s ease calc(var(--i) * 45ms); }
+.anim .discs.on .no { animation: thud .5s ease calc(var(--i) * 45ms) both; }
+.anim .shoe { opacity: 0; transform: translate(-1.5em, -2.5em) rotate(-40deg); }
+.anim .shoe.on { opacity: 1; transform: rotate(8deg);
+  transition: transform .7s cubic-bezier(.3, 1.5, .5, 1), opacity .2s; }
+@keyframes thud { 0% { transform: scale(1.6); opacity: 0; } 60% { transform: scale(.92); opacity: 1; } }
+
 ::selection { background: var(--ink); color: var(--paper); }
 :focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
 
